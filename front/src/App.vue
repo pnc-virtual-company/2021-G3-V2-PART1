@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import http from "./http-common";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  data(){
+    return{
+      users:[]
+    }
+  },
+  methods: {
+    getStatus(){
+      return process.env.VUE_APP_MODE;
+    },
+    register(username, profile, email, password, confirm){
+      if(username !== '' && profile !=='' && password !=='' && confirm !=='' && email !==''){
+        const addData = {
+          username:username,
+          profile:profile,
+          email:email,
+          password:password,
+          confirm:confirm
+        };
+        http.post('/users', addData).then(res =>{
+          this.users.unshift(res.data.user);
+        })
+      }
+    }
+  },
+  mounted() {
+    http.get('/users').then((res) =>{
+      this.users = res.data;
+    })
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
