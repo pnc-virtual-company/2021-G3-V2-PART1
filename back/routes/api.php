@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+///...............................User.................................................
+
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/signin', [UserController::class, 'signin']);
+
+//.........User..................................
+Route::get('/users', [UserController::class, 'index']);
+// Route::update('/users/{id}', [UserController::class, 'update']);
+// Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+
+//...............................Public Route (Event)..........................................
+// Route::get('/events',[EventController::class, 'index']);
+// Route::get('/events/{id}', [EventController::class, 'show']);
+
+//...............................Private Route (Event)..........................................
+Route::group(['middleware' => ['auth:sanctum']], function(){
+    // Route::post('/events',[EventController::class, 'store']);
+    // Route::put('/events/{id}', [EventController::class, 'update']);
+    // Route::delete('/events/{id}', [EventController::class, 'destroy']);
+    Route::post('/signout', [UserController::class,'signout']);
 });
