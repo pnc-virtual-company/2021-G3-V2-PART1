@@ -26,7 +26,7 @@
                         <router-link to="/rigister"> Please Register Account!</router-link>
                     </div>
                     <div class="button">
-                        <button>Sign In</button>
+                        <router-link to="/nav"> Sign In</router-link>
                     </div>
                     
                 </form>

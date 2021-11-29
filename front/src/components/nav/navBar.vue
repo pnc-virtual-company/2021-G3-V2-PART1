@@ -8,7 +8,7 @@
            <div class="menu">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
                     <li class="nav-item mr-5">
-                        <img src="../../../dist/img/profile.png" alt="Cinque Terre" width="60" height="60"> 
+                        <img src="" alt="Cinque Terre" width="60" height="60"> 
                         <h6 >Team 3</h6>
                     </li>
                     <li class="nav-item active mr-3">
@@ -34,7 +34,8 @@
                         </button>
                    </li>
                    <li>
-                       <button  class="btn btn-outline-dark">logout</button>
+                       <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
+
                    </li>
                    
                 

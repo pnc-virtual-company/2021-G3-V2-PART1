@@ -34,7 +34,7 @@
                         <router-link to="/signIn"> Please Sign in!</router-link>
                     </div>
                     <div class="button">
-                        <button>Register Now</button>
+                        <router-link to="/nav">Regiser</router-link>
                     </div>
                     
                 </form>
