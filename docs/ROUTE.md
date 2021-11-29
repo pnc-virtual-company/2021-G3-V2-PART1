@@ -20,7 +20,7 @@ routes:[
     {path:  |'/signup' , |component:   SignupView},
     {path:  |'/signin' , |component:   SigninView},
     {path:  |'/signout' , |component:  SignoutView}
-]
+]  
 
 ---
 <i>@Student Name: <b> Rady Y</b></i>
