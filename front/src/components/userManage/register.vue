@@ -158,5 +158,7 @@ h3{
     justify-content: center;
     cursor: pointer;
 }
-
+#image{
+    display: none;
+}
 </style>
