@@ -1,7 +1,7 @@
 ## ROUTE DOCUMENTATION EXAMPLE
 
 
-### 1. signin/signup Routes
+### 1. [signin/signup Routes]
 ---
 | HTTP REQUEST| ROUTES | DESCRIPTION |
 | :---        | :----   |          :--- |
@@ -14,7 +14,13 @@
 | PUT         | /events/{id}  | The route to update a event by given id |
 | DELETE      | /events/{id}  | The route to delete a event|
 
-### 2. Route Updated By:
+### 2. [signin/signup Routes from frontend]
+
+routes:[
+    {path:  |'/signup' , |component:   SignupView},
+    {path:  |'/signup' , |component:   SigninView},
+    {path:  |'/signup' , |component:   SignoutView}
+]
 
 ---
 <i>@Student Name: <b> Rady Y</b></i>
