@@ -72,6 +72,13 @@ export default {
             this.$router.push('/nav')
            
             console.log(res.data);
+        }).catch(error => {
+            let errorStatus = error.response.status;
+            if(errorStatus === 422) {
+                this.messacongeError = 'Invalid data, please try again';
+                window.confirm('Please enter confirm matching to password or your gmail already Register');
+            }
+            
         })
 
         
@@ -82,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 *{
     padding: 0;
     margin: 0;

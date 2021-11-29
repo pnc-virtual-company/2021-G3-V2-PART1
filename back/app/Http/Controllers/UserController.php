@@ -29,18 +29,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'min:3|max:10',
             'email' => 'min:8|max:20',
-            // 'profile' => 'nullable|image|mimes:jpg,jpeg,png|max:1999',
-            'password' => 'min:1|max:10',
-            'confirm_password' => 'min:1|max:10',
+          
+            'password' => 'min:1|max:10|confirmed',
+          
             
         ]);
-        // $request->file('profile')->store('public/images');
-        //Create User
+       
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        // $user->profile = $request->profile;
-        // $user->profile = $request->file('profile')->hashName();
         $user->password = bcrypt($request->password);
         $user->save();
         return response()->json(['Message' =>'Register Succesfully','data' => $user], 201);

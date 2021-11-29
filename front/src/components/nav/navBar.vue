@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #navbarTogglerDemo01{
     display: flex;
     justify-content: space-between;
