@@ -18,8 +18,8 @@
 
 routes:[
     {path:  |'/signup' , |component:   SignupView},
-    {path:  |'/signup' , |component:   SigninView},
-    {path:  |'/signup' , |component:   SignoutView}
+    {path:  |'/signin' , |component:   SigninView},
+    {path:  |'/signout' , |component:  SignoutView}
 ]
 
 ---
