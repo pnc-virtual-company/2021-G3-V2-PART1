@@ -11,7 +11,3 @@ Route::get('/users', [UserController::class, 'index']);
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/signin', [UserController::class, 'signin']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/signout', [UserController::class, 'signout']);
-    
-});
