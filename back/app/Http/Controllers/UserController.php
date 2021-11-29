@@ -42,8 +42,6 @@ class UserController extends Controller
         // $user->profile = $request->profile;
         // $user->profile = $request->file('profile')->hashName();
         $user->password = bcrypt($request->password);
-      
-
         $user->save();
         return response()->json(['Message' =>'Register Succesfully','data' => $user], 201);
     }
@@ -92,4 +90,11 @@ class UserController extends Controller
     {
         //
     }
+    
 }
+   
+
+   
+
+    
+

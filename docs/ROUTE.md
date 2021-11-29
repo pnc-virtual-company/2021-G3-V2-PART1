@@ -10,7 +10,6 @@
 
 
 
-
 ---
 
 | GET         | /users       |The route for get all users   |

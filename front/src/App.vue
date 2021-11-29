@@ -1,3 +1,4 @@
+
 <template>
   <router-view></router-view>
 </template>
@@ -18,7 +19,7 @@ export default {
       console.log(this.users);
     })
   },
-}
+};
 </script>
 
 <style>
