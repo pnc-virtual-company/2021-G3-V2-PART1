@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index()
@@ -39,7 +39,7 @@ class UserController extends Controller
     public function signout(Request $request)
     {
         auth()->user()->tokens()->delete();
-        return response()->json(['Message' => 'Logouted']);
+        return response()->json(['Message' => 'Signouted']);
     }
 
     public function signin(Request $request)
@@ -47,13 +47,13 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['Message' => 'Bed login']);
+            return response()->json(['Message' => 'Bed signin']);
         }
 
         $token = $user->createToken('MyToken')->plainTextToken;
 
         return response()->json([
-            'Message' => 'Logined',
+            'Message' => 'signed',
             'data' => $user,
             'token' => $token
         ]);

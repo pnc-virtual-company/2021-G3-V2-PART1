@@ -9,9 +9,9 @@ Route::get('/users', [UserController::class, 'index']);
 
 // PUBLIC ROUTE
 Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/signin', [UserController::class, 'signin']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/logout', [UserController::class, 'logout']);
+    Route::post('/signout', [UserController::class, 'signout']);
     
 });
