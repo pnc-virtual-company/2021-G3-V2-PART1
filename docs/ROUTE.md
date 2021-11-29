@@ -23,4 +23,3 @@ routes:[
 ]  
 
 ---
-<i>@Student Name: <b> Rady Y</b></i>
