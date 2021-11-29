@@ -39,22 +39,46 @@
 
 <script>
 
+    
+import axios from 'axios';
+const url = "http://127.0.0.1:8000/api/signin";
 export default {
-    emits:['user-login'],
-    data(){
-        return{
-            email:'',
-            password:'',
-            confirm:''
-        }
-    },
-    methods: {
-        userLogin(){
+  data() {
+    return {
+      userData: {},
+      email: "",
+      password: "",
+      errorMessage: "",
+    };
+  },
 
+  methods: {
+    signIn() {
+      let userData = {
+        email: this.email,
+        password: this.password,
+      };
+
+      axios.post(url, userData)
+      .then(res => {
+        this.userData = res.data.user;
+        this.errorMessage = '';
+        console.log(this.userData);
+      })
+      .catch(error => {
+        let statusCode = error.response.status;
+        if(statusCode === 401) {
+          this.errorMessage = 'Invalid data, please try again';
         }
-    },
-}
+      })
+    }
+  },
+  provide() {
+    return {userData: this.userData};
+  }
+};
 </script>
+
 
 <style>
 *{

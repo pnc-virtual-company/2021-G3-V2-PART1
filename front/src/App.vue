@@ -3,35 +3,19 @@
 </template>
 
 <script>
-import http from "./http-common";
+// import http from "./http-common";
+import axios from 'axios';
+const APP_URL='http://127.0.0.1:3000/api';
 export default {
   data(){
     return{
       users:[]
     }
   },
-  methods: {
-    getStatus(){
-      return process.env.VUE_APP_MODE;
-    },
-    register(username, profile, email, password, confirm){
-      if(username !== '' && profile !=='' && password !=='' && confirm !=='' && email !==''){
-        const addData = {
-          username:username,
-          profile:profile,
-          email:email,
-          password:password,
-          confirm:confirm
-        };
-        http.post('/users', addData).then(res =>{
-          this.users.unshift(res.data.user);
-        })
-      }
-    }
-  },
   mounted() {
-    http.get('/users').then((res) =>{
+    axios.get(APP_URL).then(res=>{
       this.users = res.data;
+      console.log(this.users);
     })
   },
 }
