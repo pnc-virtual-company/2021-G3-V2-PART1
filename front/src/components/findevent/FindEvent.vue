@@ -1,6 +1,7 @@
-
 <template>
-  <router-view></router-view>
+    <section>
+        <h1>Find Event</h1>
+    </section>
 </template>
 
 <script>

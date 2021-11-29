@@ -1,6 +1,7 @@
-
 <template>
-  <router-view></router-view>
+    <section>
+        <h1>My event</h1>
+    </section>
 </template>
 
 <script>
