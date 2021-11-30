@@ -135,7 +135,7 @@ button{
     background: rgb(83, 208, 224);
     font-weight: bold;
     margin-top: 30px;
-    
+    border: none;
 }
 .label{
     margin-top: 60px;

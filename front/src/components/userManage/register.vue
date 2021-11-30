@@ -141,7 +141,7 @@ button{
     color: white;
     background: rgb(83, 208, 224);
     font-weight: bold;
-   
+   border: none;
     
 }
 label{
