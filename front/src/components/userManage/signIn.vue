@@ -72,7 +72,7 @@ export default {
         this.userData = res.data.user;
         this.$router.push('/nav');
         this.errorMessage = '';
-        console.log(this.userData);
+        // console.log(this.userData);
       })
       .catch(error => {
         let statusCode = error.response.status;
