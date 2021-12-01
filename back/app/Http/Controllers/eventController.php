@@ -95,6 +95,19 @@ class eventController extends Controller
      */
     public function destroy($id)
     {
-        return Event::destroy($id);
+        $isDelete = Event::destroy($id);
+        if($isDelete == 1) 
+            return response()->json(['message' => 'Event deleted successfully'], 200);
+        return response()->json(['message' => 'ID NOT EXIST'], 404);
+    }
+    /**
+     * Search item name.
+     *
+     * @param  int  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function search($name)
+    {
+        return Event::where('title','like', '%'. $name . '%')->get();
     }
 }
