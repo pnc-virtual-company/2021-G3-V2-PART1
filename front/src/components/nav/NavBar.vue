@@ -36,8 +36,6 @@
                        <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
 
                    </li>
-                   
-                
                </ul>
 
            </div>
@@ -54,9 +52,8 @@ export default {
 </script>
 
 <style scoped>
-#navbarTogglerDemo01{
-    display: flex;
-    justify-content: space-between;
-}
-
+    #navbarTogglerDemo01{
+        display: flex;
+        justify-content: space-between;
+    }
 </style>
