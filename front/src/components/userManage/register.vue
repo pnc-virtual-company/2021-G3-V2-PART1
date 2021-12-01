@@ -47,7 +47,7 @@
 
 <script>
 import axios from 'axios';
-const APP_URL = "http://eventme.com:3000/api/register"
+const APP_URL = "http://127.0.0.1:3000/api/register"
 export default {
     
     data(){
