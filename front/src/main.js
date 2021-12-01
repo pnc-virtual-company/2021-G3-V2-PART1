@@ -6,6 +6,8 @@ import MyEvent from "./components/myevent/MyEvent.vue";
 import Category from "./components/categories/Category.vue";
 import FindEvent from "./components/findevent/FindEvent.vue";
 import AllEvent from "./components/allevent/Allevent.vue";
+import cardCategory from "./components/categories/cardCategory";
+import CategoryView from './components/categories/viewCategory';
 const app = createApp(App);
 const router = createRouter({
     history: createWebHistory(),
@@ -18,6 +20,7 @@ const router = createRouter({
     ]
 })
 app.component('nav-bar', Nav)
-
+app.component("category-card", cardCategory);
+app.component("view-category",CategoryView)
 app.use(router)
 app.mount("#app");

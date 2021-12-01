@@ -1,22 +1,49 @@
 <template>
     <section>
         <nav-bar> </nav-bar>
-        <div class="myevent">
-            <div class="logo">
-
-            </div>
-            <div class="img">
-
-            </div>
-            <div class="action">
-                <div class="text">
-
+        <div class="container d-flex justify-content-center">
+            <div class="card mt-4" style="max-width: 650px;">
+            <div class="row ">
+                <div class="col-md-4" >
+                    <img
+                        style="max-width:200px"
+                        src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
+                        alt="..."
+                        class="img-fluid rounded-start"
+                    />
                 </div>
-                <div class="event">
+                <div class="col-md-8 ">
+                    <div class="button d-flex justify-content-end p-1">
+                         <div class="dropdown">
+                            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action
+                            </button>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item text-danger" type="button">Delete</button>
+                                <button class="dropdown-item text-success" type="button">Update</button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body ml-2">
+                        <h5 class="card-title"> Title</h5>
+                        <p class="card-text">
+                        The meaning of picture and you create event what you want to so 
+                        thank of using my app
+                        </p>
+                        <p class="card-text">
+                        <small class="text-muted fas fa-alarm-clock f34e ">:3/5/221</small>
+                        </p>
+                     <div class="icont">
 
+                     </div>
+                    </div>  
                 </div>
             </div>
         </div>
+       </div>
+       
+       
     
     </section>
 </template>

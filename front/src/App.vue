@@ -1,6 +1,7 @@
 
 <template>
   <router-view></router-view>
+  <view-category></view-category>
 </template>
 
 <script>
