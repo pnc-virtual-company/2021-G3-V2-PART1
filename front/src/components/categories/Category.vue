@@ -1,7 +1,6 @@
 <template> <section>
         <nav-bar> </nav-bar>
-        
-       
+         
     </section>
    
 </template>

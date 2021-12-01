@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style>
+
 .nameIcon{
     display: flex;
     width: 900px;
