@@ -8,8 +8,7 @@
            <div class="menu">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
                     <li class="nav-item mr-5">
-                        <img src="" alt="Cinque Terre" width="60" height="60"> 
-                        <h6 >Team 3</h6>
+                        <img src="" alt="Cinque Terre" width="60" height="60">
                     </li>
                     <li class="nav-item active mr-3">
                         <router-link to="/allevent" class="nav-link text-white">All EVENTS </router-link>
@@ -54,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #navbarTogglerDemo01{
     display: flex;
     justify-content: space-between;

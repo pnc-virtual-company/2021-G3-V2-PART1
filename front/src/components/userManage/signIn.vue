@@ -13,22 +13,29 @@
                     <div class="label-reg" >
                         <label  class="label" for="">Sign in!</label>
                     </div>
+                    
                     <div>
                         <input type="text" placeholder="EMAIL" class="input" v-model="email">
                     </div>
                     <div>
                         <input type="password" placeholder="PASSWORD" class="input" v-model="password">
                     </div>
+                    
                     <div>
-                        <input type="password" placeholder="COMFIRM PASSWORD" class="input" v-model="confirm">
+                        <p class="text-danger ml-3">{{errorMessage}}</p>
                     </div>
                     <div class="p">
                         <router-link to="/rigister"> Please Register Account!</router-link>
                     </div>
                     <div class="button">
-                        <router-link to="/nav"> Sign In</router-link>
+                        <button> Sign In </button>
                     </div>
-                    
+                    <div class="d-flex justify-content-center mt-4">
+                        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-128.png" style="width:40px; height:40px;" alt="">
+                        <img src="https://cdn3.iconfinder.com/data/icons/social-icons-33/512/Telegram-128.png" style="width:40px; height:40px;" alt="">
+                        <img src="https://cdn0.iconfinder.com/data/icons/social-media-circle-6/1024/instagram-128.png" style="width:42px; height:42px;" alt="">
+                        <img src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_skype-128.png" style="width:40px; height:40px;" alt="">
+                    </div>
                 </form>
             </div>
 
@@ -53,15 +60,17 @@ export default {
   },
 
   methods: {
-    signIn() {
+    userLogin() {
       let userData = {
         email: this.email,
         password: this.password,
+        
       };
 
       axios.post(url, userData)
       .then(res => {
         this.userData = res.data.user;
+        this.$router.push('/nav');
         this.errorMessage = '';
         console.log(this.userData);
       })
@@ -73,14 +82,12 @@ export default {
       })
     }
   },
-  provide() {
-    return {userData: this.userData};
-  }
+ 
 };
 </script>
 
 
-<style>
+<style scoped>
 *{
     padding: 0;
     margin: 0;
@@ -106,7 +113,7 @@ export default {
 .input{
     width: 90%;
     padding-left: 15px;
-    margin: 10px;
+    margin: 15px;
     height: 40px;
     background: #000;
     color: rgb(255, 230, 0);
@@ -135,7 +142,7 @@ button{
     background: rgb(83, 208, 224);
     font-weight: bold;
     margin-top: 30px;
-    
+    border: none;
 }
 .label{
     margin-top: 60px;
@@ -164,5 +171,8 @@ h3{
     margin: 10px;
 }
 
-
+img{
+    margin: 5px;
+    cursor: pointer;
+}
 </style>

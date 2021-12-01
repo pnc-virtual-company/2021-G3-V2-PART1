@@ -15,7 +15,7 @@
                         <label for="">Event me!</label>
                     </div>
                     <div>
-                        <input type="file" name="" id="image" class="d-none"  v-on:change="profile">
+                        <input type="file" name="" id="image" class="d-none" >
                         <label for="image" class="d-flex"><img src="../../assets/avatar.png" alt="" style="width:90px; height:90px; text-align:center;"></label>
                     </div>
                     <div>
@@ -34,7 +34,7 @@
                         <router-link to="/signIn"> Please Sign in!</router-link>
                     </div>
                     <div class="button">
-                        <router-link to="/nav">Regiser</router-link>
+                        <button>Regiser</button>
                     </div>
                     
                 </form>
@@ -46,13 +46,14 @@
 </template>
 
 <script>
+import axios from 'axios';
+const APP_URL = "http://eventme.com:3000/api/register"
 export default {
-    emits:["user-register"],
+    
     data(){
         return{
             username:'',
             email:'',
-            profile:'',
             password:'',
             confirm:''
         }
@@ -60,19 +61,35 @@ export default {
     },
     methods: {
         userRegister(){
-            this.$emit('user-register', this.username, this.email,this.password, this.confirm);
-            this.username = '';
-            this.email ='';
-            this.profile = '';
-            this.password = '';
-            this.confirm = '';
-        },
+            let addData = {
+               name:this.username,
+               email:this.email,
+                password:this.password,
+                password_confirmation:this.confirm
+            }
+            
+        axios.post(APP_URL, addData).then(res =>{
+            this.$router.push('/nav')
+           
+            console.log(res.data);
+        }).catch(error => {
+            let errorStatus = error.response.status;
+            if(errorStatus === 422) {
+                this.messacongeError = 'Invalid data, please try again';
+                window.confirm('Please enter confirm matching to password or your gmail already Register');
+            }
+            
+        })
+
+        
+            
+        }
         
     },
 }
 </script>
 
-<style>
+<style scoped>
 *{
     padding: 0;
     margin: 0;
@@ -124,7 +141,7 @@ button{
     color: white;
     background: rgb(83, 208, 224);
     font-weight: bold;
-   
+   border: none;
     
 }
 label{

@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted() {
-    axios.get(APP_URL).then(res=>{
+    axios.get(APP_URL + '/users').then(res=>{
       this.users = res.data;
       console.log(this.users);
     })
