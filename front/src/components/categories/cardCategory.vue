@@ -1,6 +1,6 @@
 <template> 
     <section>
-        <nav-bar> </nav-bar>
+        <!-- <nav-bar> </nav-bar> -->
         <div class="container">
             <div class="nameIcon">
                 <div class="name">

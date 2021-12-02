@@ -1,6 +1,6 @@
-<template> <section>
-        <nav-bar> </nav-bar>
-         
+<template> 
+    <section>
+        <!-- <nav-ba> </nav-ba> -->
     </section>
    
 </template>

@@ -1,5 +1,12 @@
 <template>
-    <category-card></category-card>
+    <section>
+        <nav-bar></nav-bar>
+        <search-category></search-category>
+        <category-form></category-form>
+        <category-card></category-card>
+        
+    </section>
+    
 </template>
 
 <script>
