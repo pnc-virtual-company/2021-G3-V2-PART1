@@ -1,6 +1,6 @@
 <template>
     <section>
-        <nav-bar></nav-bar>
+        <nav-bar>Categories</nav-bar>
         <search-category></search-category>
         <category-form></category-form>
         <category-card></category-card>
