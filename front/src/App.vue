@@ -1,6 +1,10 @@
 
 <template>
-  <router-view></router-view>
+  <section>
+    <router-view></router-view>
+    <!-- <view-category></view-category> -->
+  </section>
+  
 </template>
 
 <script>
