@@ -73,6 +73,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return Category::destroy($id);
+        $isDelete = Category::destroy($id);
+        if($isDelete == 1) 
+            return response()->json(['message' => 'Category deleted successfully'], 200);
+        return response()->json(['message' => 'ID NOT EXIST'], 404);
+    }
+    /**
+     * Search item name.
+     *
+     * @param  int  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function search($name)
+    {
+        return Category::where('categoryName','like', '%'. $name . '%')->get();
     }
 }
