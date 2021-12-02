@@ -1,8 +1,8 @@
-<template>
+<template> 
     <section>
-        <nav-bar> </nav-bar>
-        <h1>Categories</h1>
+        <!-- <nav-ba> </nav-ba> -->
     </section>
+   
 </template>
 
 <script>
