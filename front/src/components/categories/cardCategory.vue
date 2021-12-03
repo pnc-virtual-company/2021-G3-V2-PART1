@@ -7,17 +7,39 @@
 
                 </div>
                 <div class="icon mt-3">
-                    <button class="mr-1 btn btn-outline-dark">Delete</button>
+                    <button @click="showDialog = true" class="mr-1 btn btn-outline-dark">Delete</button>
                     <button class="btn btn-outline-info">Update</button>
 
                 </div>
+                  <Dialog :cancel="cancel"
+                        :confirm="confirm"
+                        :show="showDialog"
+                        title="Are u sure ?" />
+
         </div>
+        
     </section>
    
 </template>
 
 <script>
+import Dialog from './dialog.vue';
 export default {
+    components: {Dialog},
+    data() {
+        return{
+            showDialog : true
+        }
+    },
+    methods: {
+        cancel() {
+            this.showDialog = false
+        },
+        confirm() {
+            this.showDialog = false
+        }
+
+    },
 
 }
 </script>
