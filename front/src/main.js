@@ -5,7 +5,6 @@ import SignIn from './components/userManage/signIn.vue'
 import SignOut from './components/userManage/signOut'
 import Register from './components/userManage/register';
 import Nav from "./components/nav/navBar.vue";
-
 import Category from "./components/categories/Category.vue";
 import FindEvent from "./components/findevent/FindEvent.vue";
 import AllEvent from "./components/allevent/Allevent.vue";
