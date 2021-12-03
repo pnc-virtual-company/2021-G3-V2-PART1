@@ -69,9 +69,9 @@ export default {
             }
             
         axios.post(APP_URL, addData).then(res =>{
-            this.$router.push('/nav')
-           
-            console.log(res.data);
+            this.$router.push('/nav');
+            localStorage.setItem('name', res.data.data.name);
+            console.log(res.data.data.name);
         }).catch(error => {
             let errorStatus = error.response.status;
             if(errorStatus === 422) {

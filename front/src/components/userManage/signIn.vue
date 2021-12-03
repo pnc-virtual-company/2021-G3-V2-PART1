@@ -70,8 +70,10 @@ export default {
       axios.post(url, userData)
       .then(res => {
         this.userData = res.data.user;
+        localStorage.setItem('name', res.data.user.name);
         this.$router.push('/nav');
         this.errorMessage = '';
+        console.log(res.data.user.name);
         // console.log(this.userData);
       })
       .catch(error => {
