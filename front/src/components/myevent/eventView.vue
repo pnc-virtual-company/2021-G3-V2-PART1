@@ -1,7 +1,8 @@
 <template>
     <section>
-        <event-card></event-card>
         <create-event></create-event>
+        <event-card></event-card>
+        
     </section>
 </template>
 
