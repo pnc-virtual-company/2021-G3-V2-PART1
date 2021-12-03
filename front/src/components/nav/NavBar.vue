@@ -26,12 +26,6 @@
            </div>
            <div class="logout">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                   <li class="d-flex mr-3">
-                        <input id="search-input" type="search" class="form-control" />
-                        <button id="search-button " type="button" class="btn btn-secondary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                   </li>
                    <li>
                        <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
 

@@ -55,7 +55,7 @@
                     <button class="Cancelbtn bg-info close"  data-dismiss="modal" aria-label="Close" @click="cencel">
                       CANCEL
                     </button>
-                    <button class="button-15 close" data-dismiss="modal" aria-label="Close"  role="button">CREATE</button>
+                    <button class="button-15" close role="button">CREATE</button>
                   </div>
                 </form>
               </div>
