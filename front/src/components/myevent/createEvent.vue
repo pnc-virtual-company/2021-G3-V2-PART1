@@ -1,18 +1,12 @@
 <template>
     <section>
-        <div class="myevent">
-            <div class="logo">
-
-            </div>
-            <div class="img">
-
-            </div>
-            <div class="action">
-                <div class="text">
-
-                </div>
-                <div class="event">
-
+        <div class="container">
+            <div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
