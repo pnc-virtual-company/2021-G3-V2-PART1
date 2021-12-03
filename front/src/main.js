@@ -12,6 +12,7 @@ import cardCategory from "./components/categories/cardCategory.vue";
 import CategoryView from './components/categories/viewCategory';
 import CategorySearch from "./components/categories/searchCategory.vue";
 import CategoryForm from "./components/categories/categoryForm.vue";
+import UpdateEvent from "./components/categories/editCategory.vue";
 
 // import event 
 
@@ -28,13 +29,14 @@ const router = createRouter({
     ]
 })
 app.component('nav-bar', Nav)
-// app category 
+// app category ////
 app.component("search-category", CategorySearch);
 app.component("category-card", cardCategory);
 app.component("view-category",CategoryView);
 app.component("category-form", CategoryForm);
+app.component("category-edit", UpdateEvent);
 
-// app myevent 
+// app myevent ///
 
 app.use(router)
 app.mount("#app");

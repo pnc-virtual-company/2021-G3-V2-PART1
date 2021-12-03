@@ -5,6 +5,7 @@
         <category-form @add-category = "createCategory" ></category-form>
         <category-card :categoryName="categories" @categoryName="searchName"></category-card>
         
+        
     </section>
     
 </template>

@@ -22,7 +22,7 @@
         </div>
         <div class="right">
             <button class="mr-2 btn btn-danger text-white" @click="showDialog = true">Delete</button>
-            <button class="btn btn-primary text-white">Udate</button>
+            <button class="text-white"><category-edit></category-edit></button>
         </div>
         <Dialog :cancel="cancel"
                 :confirm="confirm"
