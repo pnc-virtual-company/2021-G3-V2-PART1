@@ -2,7 +2,7 @@
 <template>
   <header>
     <section>
-        <!-- <nav-ba> </nav-ba> -->
+      <!-- <nav-ba> </nav-ba> -->
     </section>
     <div class="wrapper">
       <!--================================|-NAVBAR-RIGHT-|================================-->
@@ -42,12 +42,22 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
-                  <input type="text" placeholder="Enter New Categories...">
-                </div>
-                <div class="modal-footer">
-                   <button class="button-15" role="button">Create</button>
-                </div>
+                <form @submit.prevent="createCategory">
+                  <div class="modal-body">
+                    <input
+                      type="text"
+                      placeholder="Enter New Categories..."
+                      autofocus
+                      v-model="categoryName"
+                    />
+                  </div>
+                  <div class="modal-footer d-flex">
+                    <button class="Cancelbtn bg-info close"  data-dismiss="modal" aria-label="Close" @click="cencel">
+                      CANCEL
+                    </button>
+                    <button class="button-15 close" data-dismiss="modal" aria-label="Close"  role="button">CREATE</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -57,64 +67,65 @@
   </header>
 </template>
 <script>
-export default ({
-    data() {
-        return{
-           events:[],
-
-        }
+export default {
+  emits: ["add-category"],
+  data() {
+    return {
+      categoryName: "",
+    };
+  },
+  methods: {
+    createCategory() {
+      this.$emit(
+        "add-category",
+        this.categoryName,
+        console.log(this.categoryName),
+        (this.categoryName = "")
+      );
     },
-    // methods: {
-    //     createMyevent(){
-    //       let data={}
-    //       let url =""
-    //       axios
-    //         .post(url,data)
-    //         .then(response=>{
-    //           console.log(response.data)
-    //         })
-    //     }
-    // }
-})
+  },
+};
 </script>
 <style scoped>
-
-.btn-add{
-  background: #ffe836;
-  color: #000000;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+.btn-add {
+  background: rgb(94, 94, 221);
+  color: white;
+  font-family: Georgia, "Times New Roman", Times, serif;
   border-radius: 0px 15px 0px 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-
 }
-.wrapper{
+.btn-add:hover{
+  background-color: tomato;
+}
+
+.wrapper {
   /* display: flex; */
   margin-left: 1000px;
   font-size: 15px;
-
+  padding: 0px;
 }
-.modal-body{
+.modal-body {
   font-weight: normal;
   font-family: Calibri;
-  color:blue;
-
+  color: blue;
 }
 .button-15 {
-  background-image: linear-gradient(#42A1EC, #0070C9);
-  border: 1px solid #0077CC;
+  background-image: linear-gradient(#42a1ec, #0070c9);
+  border: 1px solid #0077cc;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   direction: ltr;
   display: block;
-  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
   font-size: 17px;
   font-weight: 400;
-  letter-spacing: -.022em;
+  letter-spacing: -0.022em;
   line-height: 1.47059;
   min-width: 30px;
   overflow: visible;
@@ -125,22 +136,21 @@ export default ({
   touch-action: manipulation;
   white-space: nowrap;
   font-weight: bold;
-  margin-right: 175px;
 }
 .button-15:disabled {
   cursor: default;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .button-15:hover {
-  background-image: linear-gradient(#51A9EE, #147BCD);
-  border-color: #1482D0;
+  background-image: linear-gradient(#51a9ee, #147bcd);
+  border-color: #1482d0;
   text-decoration: none;
 }
 
 .button-15:active {
-  background-image: linear-gradient(#3D94D9, #0067B9);
-  border-color: #006DBC;
+  background-image: linear-gradient(#3d94d9, #0067b9);
+  border-color: #006dbc;
   outline: none;
 }
 
@@ -148,17 +158,46 @@ export default ({
   box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
   outline: none;
 }
+/* .button-15:hover{
+  background-color: orange;
+} */
 
 .btn:hover {
   background: #3c0f01;
   color: white;
 }
-.modal-title{
+/* style btnCancel */
+.Cancelbtn {
+  background-color: rgb(84, 54, 218);
+  border: 1px solid #0077cc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 1.47059;
+  min-width: 30px;
+  overflow: visible;
+  padding: 4px 15px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.modal-title {
   justify-content: center;
   align-items: center;
   margin: auto;
   margin-left: 25%;
-  font-weight: bold;  
+  font-weight: bold;
 }
 /* =================|-MODAL-|=================*/
 .modal-dialog {
@@ -179,10 +218,10 @@ export default ({
 .modal-body ::placeholder {
   color: #004f6c;
 }
+
 @media (max-width: 880px) {
   .wrapper {
     display: block;
   }
-  
 }
 </style>
