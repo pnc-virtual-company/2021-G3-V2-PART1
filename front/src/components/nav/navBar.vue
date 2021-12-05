@@ -8,7 +8,8 @@
            <div class="menu">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
                     <li class="nav-item mr-5">
-                        <img src="" alt="Cinque Terre" width="60" height="60">
+                        <!-- <img src="" alt="Cinque Terre" width="60" height="60"> -->
+                        <h2 class="text-light">{{username}}</h2>
                     </li>
                     <li class="nav-item active mr-3">
                         <router-link to="/allevent" class="nav-link text-white">All EVENTS </router-link>
@@ -36,8 +37,6 @@
                        <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
 
                    </li>
-                   
-                
                </ul>
 
            </div>
@@ -49,7 +48,11 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            username:localStorage.getItem("name")
+        }
+    },
 }
 </script>
 
