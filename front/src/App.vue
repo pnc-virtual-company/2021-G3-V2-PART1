@@ -1,6 +1,11 @@
 
 <template>
-  <router-view></router-view>
+  <section>
+    <router-view></router-view>
+    <!-- <view-category></view-category> -->
+    
+  </section>
+  
 </template>
 
 <script>
@@ -16,7 +21,7 @@ export default {
   mounted() {
     axios.get(APP_URL + '/users').then(res=>{
       this.users = res.data;
-      // console.log(this.users);
+      console.log(this.users);
     })
   },
 };

@@ -1,14 +1,15 @@
 <template>
   <section>
       <!-- form search -->
-    <div class=" p-4">
-        <div>
-            <form class="input-group p-4">
+    <div class=" p-4 ">
+        <div class=" search ">
+            <form class="input-group p-4" style="width:65%;">
                 <input type="search" class="form-control rounded" placeholder="Search" v-model="search"
                 aria-label="Search"
                 aria-describedby="search-addon"
+                v-on:keyup="addName"
                 />
-                <button type="submit" class="btn btn-outline-warning ml-4" @click.prevent="addName">search</button>
+                <button type="submit" id="search" class="btn btn-outline-warning ml-4" @click.prevent="addName">search</button>
             </form>
         </div>
   </div>
@@ -184,5 +185,17 @@ export default {
 h3 {
     font-weight: 600;
     margin: 0;
+}
+.search{
+    /* margin: auto;
+    margin-left: 15%; */
+    display: flex;
+    justify-content: center;
+    
+}
+input[type=search],
+#search{
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 </style>

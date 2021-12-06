@@ -6,37 +6,24 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
            <div class="menu">
-                <ul class="navbar-nav  ">
-                    <!-- profile -->
-                    <li class="nav-item mr-3">
-                            <img
-                            src="https://mdbootstrap.com/img/new/avatars/2.jpg"
-                            class="rounded-circle"
-                            height="45"
-                            alt=""
-                            loading="lazy"
-                            />
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+                    <li class="nav-item mr-5">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHgwL4r2DN1qg91OOqIViiv0Uxw-9yqo-PiQ&usqp=CAU" alt="Cinque Terre" width="60" height="60">
                     </li>
-                    <!-- name user -->
-                    <li class="nav-item  mt-3  mr-2">
-                        <h6 class="text-white">{{username}}</h6>
-                    </li>
-                    <!-- pages -->
-                    <li class="nav-item active mr-4 mt-2">
+                    <li class="nav-item active mr-3">
                         <router-link to="/allevent" class="nav-link text-white">All EVENTS </router-link>
                     </li>
                     <li class="nav-item mr-3">
-                        <router-link to="/myevent" class="nav-link text-white mt-2">MY EVENTS</router-link>
+                        <router-link to="/myevent" class="nav-link text-white">MY EVENTS</router-link>
                     </li>
                     <li class="nav-item mr-3">
-                        <router-link to="/category" class="nav-link text-white mt-2">CATAGORIES</router-link>
+                        <router-link to="/category" class="nav-link text-white">CATAGORIES</router-link>
                     </li>
                     <li class="nav-item mr-3">
-                        <router-link to="/findEvent" class="nav-link text-white mt-2">FIND EVENT</router-link>
+                        <router-link to="/findEvent" class="nav-link text-white">FIND EVENT</router-link>
                     </li>
                 </ul>
            </div>
-           <!-- logout button  -->
            <div class="logout">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                    <li>
@@ -54,12 +41,7 @@
 
 <script>
 export default {
-    data() {
-        return {
-            username:localStorage.getItem("name")
-        }
-    },
-   
+
 }
 </script>
 
