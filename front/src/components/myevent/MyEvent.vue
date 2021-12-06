@@ -11,7 +11,7 @@
         <div>
           <button
             class="btn-add ms-1 h-50 mt-2"
-            type="button"
+            type="button"  
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
