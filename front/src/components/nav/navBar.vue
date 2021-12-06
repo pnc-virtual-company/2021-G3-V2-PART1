@@ -8,7 +8,13 @@
            <div class="menu">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
                     <li class="nav-item mr-5">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHgwL4r2DN1qg91OOqIViiv0Uxw-9yqo-PiQ&usqp=CAU" alt="Cinque Terre" width="60" height="60">
+                         <img
+                            src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+                            class="rounded-circle"
+                            height="25"
+                            alt=""
+                            loading="lazy"  
+                        />
                     </li>
                     <li class="nav-item active mr-3">
                         <router-link to="/allevent" class="nav-link text-white">All EVENTS </router-link>
