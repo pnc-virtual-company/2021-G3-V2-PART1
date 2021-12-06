@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import SignIn from './components/userManage/signIn.vue'
 import SignOut from './components/userManage/signOut'
 import Register from './components/userManage/register';
-import Nav from "./components/nav/NavBar.vue";
+import Nav from "./components/nav/navBar.vue";
 import MyEvent from "./components/myevent/MyEvent.vue";
 // import Category from "./components/categories/Category.vue";
 import FindEvent from "./components/findevent/FindEvent.vue";
