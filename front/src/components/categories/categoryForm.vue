@@ -13,6 +13,7 @@
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
+            @click="btnCreateNewCate"
           >
             +Create Categories
           </button>
@@ -52,10 +53,11 @@
                     />
                   </div>
                   <div class="modal-footer d-flex">
-                    <button class="Cancelbtn bg-info close"  data-dismiss="modal" aria-label="Close" @click="cencel">
+                    <button type="button" class="Cancelbtn bg-info close"  data-dismiss="modal" aria-label="Close" @click="cencel">
                       CANCEL
                     </button>
-                    <button class="button-15" close role="button">CREATE</button>
+                    <button class="button-15" v-if="isCreate" data-dismiss="modal">CREATE</button>
+                    <button type="button" v-if="showForm" @click="updateCategory">UPDATE</button>
                   </div>
                 </form>
               </div>
@@ -69,12 +71,17 @@
 <script>
 export default {
   emits: ["add-category"],
+  props: ['showForm'],
   data() {
     return {
       categoryName: "",
+      isCreate: false
     };
   },
   methods: {
+    btnCreateNewCate(){
+      this.isCreate= true
+    },
     createCategory() {
       this.$emit(
         "add-category",
@@ -83,6 +90,10 @@ export default {
         (this.categoryName = "")
       );
     },
+    updateCategory(){
+      console.log('hee')
+    }
+    
   },
 };
 </script>

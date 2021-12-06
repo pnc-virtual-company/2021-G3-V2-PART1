@@ -1,9 +1,11 @@
 <template>
     <section>
         <nav-bar></nav-bar>
-        <search-category></search-category>
         <category-form @add-category = "createCategory" ></category-form>
-        <category-card :categoryName="categories" @categoryName="searchName"></category-card>
+        <category-card  :categoryName="categories" 
+        @categoryName="searchName"
+        @updateCatgoryData="updateNameCategory"
+        @deleteItem="deleteCategory"></category-card>
         
     </section>
     
@@ -17,24 +19,25 @@ export default {
     data(){
         return{
             categories:[],
-            categoryName:[]
+            categoryName:[],
+            showForm: false,
         };
     },
     methods: {
         getCategory(){
             axios.get(APP_URL).then(res=>{
                 this.categories = res.data;
-                console.log(this.categories);
+               
             })
         },
         createCategory(categoryName){
                 if(categoryName !== ''){
                     const addCategory ={
-                    categoryName: categoryName
+                    categoryName: categoryName,
                 
                 };
                 axios.post(APP_URL, addCategory).then(res =>{
-                    // this.categories.unshift(res.data.categoryName);
+    
                     this.getCategory();
                     console.log(res.data)
                     
@@ -51,7 +54,24 @@ export default {
                 this.getCategory();
             }
             // console.log(name)
+        },
+        deleteCategory(id){
+            axios.delete(APP_URL + '/' + id).then(res =>{
+                console.log("deleted",res.data);
+                this.getCategory();
+            })
+        },
+        updateNameCategory(ctrId, ctrName){
+            axios.put(APP_URL+'/'+ctrId, {categoryName:ctrName})
+            .then(res=>{
+                console.log(res.data);
+                this.getCategory();
+            })
+            .catch(err=>{
+                console.log("Error for update: " + err);
+            })
         }
+      
 
     
     },
