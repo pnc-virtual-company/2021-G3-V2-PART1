@@ -11,7 +11,7 @@
                          <img
                             src="https://mdbootstrap.com/img/new/avatars/2.jpg"
                             class="rounded-circle"
-                            height="25"
+                            height="40"
                             alt=""
                             loading="lazy"  
                         />
