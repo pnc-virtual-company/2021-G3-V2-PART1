@@ -7,10 +7,14 @@ import FindEvent from "./components/findevent/FindEvent.vue";
 import AllEvent from "./components/allevent/Allevent.vue";
 
 // ============== category ==================
-import cardCategory from "./components/categories/cardCategory";
+// import category
+import cardCategory from "./components/categories/cardCategory.vue";
 import CategoryView from './components/categories/viewCategory';
-import CategorySearch from "./components/categories/searchCategory.vue";
+import CategorySearch from "./components/categories/formUpdate.vue";
 import CategoryForm from "./components/categories/categoryForm.vue";
+
+// ============== event ==================
+// import event 
 const app = createApp(App);
 const router = createRouter({
     history: createWebHistory(),
@@ -23,10 +27,13 @@ const router = createRouter({
     ]
 })
 app.component('nav-bar', Nav)
-app.component("search-category", CategorySearch);
+// app category 
+app.component("update-category", CategorySearch);
 app.component("category-card", cardCategory);
 app.component("view-category",CategoryView);
-app.component("category-form", CategoryForm)
+app.component("category-form", CategoryForm);
+
+// app myevent 
 
 app.use(router)
 app.mount("#app");
