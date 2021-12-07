@@ -58,10 +58,10 @@
                       <input type="text" placeholder="Title" v-model="title" required />
                     </div>
                     <div>
-                      <input type="text" placeholder="Event Catigories" v-model="category" required/>
+                      <input type="text" placeholder="Event Catigories" required/>
                     </div>
                     <div class="city">
-                      <input type="text" placeholder="City" v-model="city" required/>
+                      <input type="text" placeholder="City"  required/>
                     </div>
                     <textarea name="message" rows="10" cols="30" placeholder="You desciption" v-model="message" required></textarea>
                     
@@ -121,7 +121,7 @@ export default ({
       newEvent.append('startdate', this.StartDate);
       newEvent.append('enddate', this.EndDate);
 
-      console.log(newEvent);
+      console.log(this.image  );
 
       axios.post("http://127.0.0.1:8000/api/events", newEvent).then(res => {
         console.log(res.data);
