@@ -29,15 +29,15 @@ class eventController extends Controller
             'title' => 'min:1|max:100',
             'description' => 'min:1|max:200',
             'image' =>'nullable|image|mimes:jpg,jpeg,png|max:1999'
-        //     // 'stat_date' => '',
-        //     // 'end_date' => ''
+       
 
         ]);
+
+        $request->file('image')->store("public/image");
 
         $event = new Event();
         $event->title = $request->title;
         $event->description = $request->description;
-        $event->image = $request->image;
         $event->image = $request->file('image')->hashName();
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;

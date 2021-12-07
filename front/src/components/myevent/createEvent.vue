@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">CENCEL</button>
-                  <button type="button" class="btn btn-info" data-dismiss="modal">CREATE</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal" @click="addEvent">CREATE</button>
                 </div>
               </form> 
           </div>
@@ -95,35 +95,38 @@
 
 
 <script>
+import axios from "axios";
+
 export default ({
   data() {
     return {
       title:'',
-      category:'',
       message:'',
-      city:'',
       StartDate:'',
       EndDate:'',
-      image: "",
-      storefile :''
+      image: '',
     };
   },
   methods: {
     onFileselected(event) {
-        this.image = event.target.files[0].name
+        this.image = event.target.files[0]
         console.log(this.image);
     },
-    addEvent(){
-      let newEvent = {
-        title: this.title,
-        category: this.category,
-        city: this.city,
-        statdate: this.StartDate,
-        enddate: this.EndDate,
-        file: this.image,
-      }
     
+    addEvent(){
+      const newEvent = new FormData();
+      newEvent.append('title', this.title);
+      newEvent.append('description', this.message);
+      newEvent.append('image', this.image);
+      newEvent.append('startdate', this.StartDate);
+      newEvent.append('enddate', this.EndDate);
+
       console.log(newEvent);
+
+      axios.post("http://127.0.0.1:8000/api/events", newEvent).then(res => {
+        console.log(res.data);
+        console.log('Created')
+      });
     } 
   }
 

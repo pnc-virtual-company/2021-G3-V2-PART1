@@ -16,7 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             // $table->foreignId('user_id')->contrained('CASCADE');
-            $table->string('tile');
+            $table->string('title');
             $table->string('description');
             $table->string('image');
             $table->datetime('start_date');
