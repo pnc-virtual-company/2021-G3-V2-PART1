@@ -69,6 +69,8 @@ export default {
             })
             .catch(err=>{
                 console.log("Error for update: " + err);
+
+
             })
         }
       
