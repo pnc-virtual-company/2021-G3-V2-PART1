@@ -12,6 +12,7 @@ import cardCategory from "./components/categories/cardCategory.vue";
 import CategoryView from './components/categories/viewCategory';
 import CategorySearch from "./components/categories/formUpdate.vue";
 import CategoryForm from "./components/categories/categoryForm.vue";
+import UpdateEvent from "./components/categories/editCategory.vue";
 
 // ============== event ==================
 // import event 
@@ -32,8 +33,9 @@ app.component("update-category", CategorySearch);
 app.component("category-card", cardCategory);
 app.component("view-category",CategoryView);
 app.component("category-form", CategoryForm);
+app.component("category-edit", UpdateEvent);
 
-// app myevent 
+// app myevent ///
 
 app.use(router)
 app.mount("#app");

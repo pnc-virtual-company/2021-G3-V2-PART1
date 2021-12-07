@@ -12,7 +12,7 @@
             class="btn-add ms-1 h-50 mt-2"
             type="button"
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            data-bs-target="#staticBackdrop" 
             @click="btnCreateNewCate"
           >
             +Create Categories
@@ -229,7 +229,6 @@ export default {
 .modal-body ::placeholder {
   color: #004f6c;
 }
-
 @media (max-width: 880px) {
   .wrapper {
     display: block;
