@@ -40,7 +40,6 @@ export default {
         });
       }
     },
-<<<<<<< HEAD
     methods: {
         getCategory(){
             axios.get(APP_URL).then(res=>{
@@ -94,24 +93,6 @@ export default {
       
 
     
-=======
-    searchName(name) {
-      if (name !== "") {
-        axios.get(APP_URL + "/search/" + name).then((res) => {
-          this.categories = res.data;
-          console.log(name);
-        });
-      } else {
-        this.getCategory();
-      }
-      // console.log(name)
-    },
-    deleteCategory(id) {
-      axios.delete(APP_URL + "/" + id).then((res) => {
-        console.log("deleted", res.data);
-        this.getCategory();
-      });
->>>>>>> 1846204faa762346119fae748a3379419c67d9b2
     },
     updateNameCategory(ctrId, ctrName) {
       axios
