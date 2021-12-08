@@ -1,32 +1,38 @@
 
 <template>
   <section>
-    <router-view></router-view>
-    <!-- <view-category></view-category> -->
-    
+    <navbar v-if="isNotHidden" @isNotHidden="navHidden" @isNothide="navHidden"></navbar>
+    <router-view @isNotHidden="navHidden"/>
   </section>
-  
 </template>
 
 <script>
-// import http from "./http-common";
-import axios from 'axios';
-const APP_URL='http://127.0.0.1:3000/api';
-export default {
-  data(){
-    return{
-      users:[]
-    }
-  },
-  mounted() {
-    axios.get(APP_URL + '/users').then(res=>{
-      this.users = res.data;
-      console.log(this.users);
-    })
-  },
-};
+    import Navbar from "./components/nav/Navbar.vue";
+    import axios from './http-common.js' 
+   
+    export default {
+      components: {
+        'navbar': Navbar,
+      },
+      data() {
+        return {
+          users: [],
+          isNotHidden: false
+        };
+      },
+      methods: {
+        navHidden(isHidden){
+          this.isNotHidden = isHidden;
+        }
+      },
+      mounted() {
+        axios.get("/users").then((res) => {
+          this.users = res.data;
+          console.log(this.users);
+        });
+      },
+    };
 </script>
 
 <style>
-
 </style>

@@ -2,7 +2,6 @@
 <template>
   <header>
     <section>
-      <!-- <nav-ba> </nav-ba> -->
     </section>
     <div class="d-flex">
       <button class="text-white border border-none bg-danger m-4">CATEGORIES</button>

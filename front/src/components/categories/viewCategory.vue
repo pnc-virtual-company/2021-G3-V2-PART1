@@ -1,6 +1,5 @@
 <template>
     <section>
-        <nav-bar></nav-bar>
         <category-form @add-category="createCategory" ></category-form>
         <category-card  
         :categoryName="categories" 
@@ -14,9 +13,15 @@
 </template>
 
 <script>
-const APP_URL = 'http://127.0.0.1:8000/api/categories';
-import axios from 'axios' 
+
+import cardCategory from "./cardCategory.vue";
+import CategoryForm from "./categoryForm.vue";
+import axios from '../../http-common.js' 
 export default {
+    components: {
+        'category-form': CategoryForm,
+        'category-card': cardCategory,
+    },
     props: ['category'],
     data(){
         return{
@@ -28,19 +33,18 @@ export default {
     },
     methods: {
         getCategory(){
-            axios.get(APP_URL).then(res=>{
+            axios.get('/categories').then(res=>{
                 this.categories = res.data;
                
             })
         },
         createCategory(categoryName){
-            console.log('hello');
                 if(categoryName !== ''){
                     const addCategory ={
                     categoryName: categoryName,
                 
                 };
-                axios.post(APP_URL, addCategory).then(res =>{
+                axios.post('/categories', addCategory).then(res =>{
                     this.getCategory();
                     console.log(res.data)
                 })
@@ -57,23 +61,22 @@ export default {
         },
         searchName(name) {
             if(name !== '') {
-                axios.get(APP_URL + "/search/" + name).then(res => {
+                axios.get("/categories/search/" + name).then(res => {
                     this.categories = res.data;
                     
                 })
             }else {
                 this.getCategory();
             }
-            // console.log(name)
         },
         deleteCategory(id){
-            axios.delete(APP_URL + '/' + id).then(res =>{
+            axios.delete( '/categories/' + id).then(res =>{
                 console.log("deleted",res.data);
                 this.getCategory();
             })
         },
         updateNameCategory(ctrId, ctrName){
-            axios.put(APP_URL+'/'+ctrId, {categoryName:ctrName})
+            axios.put('categories/'+ctrId, {categoryName:ctrName})
             .then(res=>{
                 console.log(res.data);
                 this.getCategory();

@@ -1,6 +1,6 @@
 <template>
     <section>
-        <nav-bar> </nav-bar>
+       
         <div class="container d-flex justify-content-center">
             <div class="card mt-4" style="max-width: 650px;">
             <div class="row ">

@@ -5,8 +5,8 @@
     </section>
 </template>
 <script>
-const APP_URL = 'http://127.0.0.1:8000/api/events';
-import axios from 'axios'
+
+import axios from '../../http-common.js' 
 export default {
     data(){
         return{
@@ -19,9 +19,9 @@ export default {
     },
     methods: {
         getEvent(){
-            axios.get(APP_URL).then(res=>{
+            axios.get('/event').then(res=>{
                 this.events = res.data;
-                console.log(events);
+            
             })
         }
     },

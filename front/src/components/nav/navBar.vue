@@ -36,26 +36,32 @@
            <div class="logout">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                    <li>
-                       <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
+                       <button  class="btn btn-outline-dark "><router-link to="/signIn" @click="logOut">Logout</router-link></button>
 
                    </li>
                </ul>
-
            </div>
-           
         </div>
-      
     </nav>
   </header>
 </template>
 
 <script>
+
 export default {
+    emits:['isNotHidden'],
     data(){
         return{
-            username:localStorage.getItem('name')
+            username:localStorage.getItem('name'),
+            isNav:true
         }
-    }
+    },
+    methods: {
+        logOut(){
+            localStorage.removeItem('name');
+            this.$emit('isNotHidden', false);
+        }
+    },
 };
 </script>
 

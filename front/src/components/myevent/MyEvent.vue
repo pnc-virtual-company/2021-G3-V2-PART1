@@ -2,8 +2,7 @@
 <template>
   <header>
     <section>
-        <nav-bar> </nav-bar>
-        <h1>MyEvent</h1>
+      <h1>MyEvent</h1>
     </section>
     <div class="wrapper">
       <!--================================|-NAVBAR-RIGHT-|================================-->
@@ -44,12 +43,26 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <input type="text" placeholder="Enter New MyEvent..." ><br><br>
-                  <input type="file" id="img" name="img" accept="image/*"><br><br>
-                  <textarea rows="3" cols="65" name="comment" form="usrform" placeholder="Enter New here..."></textarea> 
+                  <input
+                    type="text"
+                    placeholder="Enter New MyEvent..."
+                  /><br /><br />
+                  <input
+                    type="file"
+                    id="img"
+                    name="img"
+                    accept="image/*"
+                  /><br /><br />
+                  <textarea
+                    rows="3"
+                    cols="65"
+                    name="comment"
+                    form="usrform"
+                    placeholder="Enter New here..."
+                  ></textarea>
                 </div>
                 <div class="modal-footer">
-                   <button class="button-15" role="button">Create</button>
+                  <button class="button-15" role="button">Create</button>
                 </div>
               </div>
             </div>
@@ -60,63 +73,60 @@
   </header>
 </template>
 <script>
-export default ({
-    data() {
-        return{
-            categories:[],
-            
-        }
-    },
-    // methods: {
-    //     CreateCategory(){
-    //         let data={}
-    //         let url="";
-    //         axios
-    //           .post(url,data)
-    //           .then(response=>{
-    //               console.log(response.data)
-    //           })
-    //     },
-    //   }
-})
+export default {
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  // methods: {
+  //     CreateCategory(){
+  //         let data={}
+  //         let url="";
+  //         axios
+  //           .post(url,data)
+  //           .then(response=>{
+  //               console.log(response.data)
+  //           })
+  //     },
+  //   }
+};
 </script>
 <style scoped>
-.btn-add{
+.btn-add {
   background: #ffe836;
   color: #000000;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   border-radius: 0px 15px 0px 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-
 }
-.wrapper{
+.wrapper {
   /* display: flex; */
   margin-left: 1000px;
   font-size: 15px;
-
 }
-.modal-body{
+.modal-body {
   font-weight: normal;
   font-family: Calibri;
-  color:blue;
-
+  color: blue;
 }
 .button-15 {
-  background-image: linear-gradient(#42A1EC, #0070C9);
-  border: 1px solid #0077CC;
+  background-image: linear-gradient(#42a1ec, #0070c9);
+  border: 1px solid #0077cc;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   direction: ltr;
   display: block;
-  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
   font-size: 17px;
   font-weight: 400;
-  letter-spacing: -.022em;
+  letter-spacing: -0.022em;
   line-height: 1.47059;
   min-width: 30px;
   overflow: visible;
@@ -131,18 +141,18 @@ export default ({
 }
 .button-15:disabled {
   cursor: default;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .button-15:hover {
-  background-image: linear-gradient(#51A9EE, #147BCD);
-  border-color: #1482D0;
+  background-image: linear-gradient(#51a9ee, #147bcd);
+  border-color: #1482d0;
   text-decoration: none;
 }
 
 .button-15:active {
-  background-image: linear-gradient(#3D94D9, #0067B9);
-  border-color: #006DBC;
+  background-image: linear-gradient(#3d94d9, #0067b9);
+  border-color: #006dbc;
   outline: none;
 }
 
@@ -155,14 +165,14 @@ export default ({
   background: #3c0f01;
   color: white;
 }
-.modal-title{
+.modal-title {
   justify-content: center;
   align-items: center;
   margin: auto;
   margin-left: 25%;
-  font-weight: bold;  
+  font-weight: bold;
 }
-textarea{
+textarea {
   width: 100%;
   border: none;
   border-bottom: solid #ebd1c9 2px;
@@ -170,7 +180,7 @@ textarea{
   font-weight: 800;
   color: #004f6c;
 }
-h1{
+h1 {
   margin-top: 0px;
 }
 /* =================|-MODAL-|=================*/
@@ -196,6 +206,5 @@ h1{
   .wrapper {
     display: block;
   }
-  
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 <section>
     <div class="register-form">
-        <div class="nav"></div>
+        
         <div class="contain-form">
             <div class="image">
                 <h3>Event me!!</h3>
@@ -46,16 +46,16 @@
 
 <script>
 
-    
-import axios from 'axios';
-const url = "http://127.0.0.1:8000/api/signin";
+import axios from '../../http-common.js'
 export default {
+    emits: ['isNotHidden'],
   data() {
     return {
       userData: {},
       email: "",
       password: "",
       errorMessage: "",
+    
     };
   },
 
@@ -67,14 +67,15 @@ export default {
         
       };
 
-      axios.post(url, userData)
+      axios.post('/signin', userData)
       .then(res => {
         this.userData = res.data.user;
         localStorage.setItem('name', res.data.user.name);
-        this.$router.push('/nav');
+        this.$router.push('/myevent');
         this.errorMessage = '';
+        this.$emit('isNotHidden', true);
         console.log(res.data.user.name);
-        // console.log(this.userData);
+       
       })
       .catch(error => {
         let statusCode = error.response.status;

@@ -1,7 +1,6 @@
 <template>
 <section>
     <div class="register-form">
-        <div class="nav"></div>
         <div class="contain-form">
             <div class="image">
                 <h3>Event me!!</h3>
@@ -46,16 +45,18 @@
 </template>
 
 <script>
-import axios from 'axios';
-const APP_URL = "http://127.0.0.1:3000/api/register"
+// import axios from 'axios';
+// const APP_URL = "http://127.0.0.1:3000/api/register"
+import axios from '../../http-common.js'
 export default {
-    
+    emits: ['isNotHidden'],
     data(){
+       
         return{
             username:'',
             email:'',
             password:'',
-            confirm:''
+            confirm:'',
         }
         
     },
@@ -68,18 +69,19 @@ export default {
                 password_confirmation:this.confirm
             }
             
-        axios.post(APP_URL, addData).then(res =>{
-            this.$router.push('/nav');
-            localStorage.setItem('name', res.data.data.name);
-            console.log(res.data.data.name);
-        }).catch(error => {
-            let errorStatus = error.response.status;
-            if(errorStatus === 422) {
-                this.messacongeError = 'Invalid data, please try again';
-                window.confirm('Please enter confirm matching to password or your gmail already Register');
-            }
+            axios.post('/register', addData).then(res =>{
+                this.$router.push('/myevent');
+                localStorage.setItem('name', res.data.data.name);
+                console.log(res.data.data.name);
+                this.$emit('isNotHidden',true);
+            }).catch(error => {
+                let errorStatus = error.response.status;
+                if(errorStatus === 422) {
+                    this.messacongeError = 'Invalid data, please try again';
+                    window.confirm('Please enter confirm matching to password or your gmail already Register');
+                }
             
-        })
+            })
 
         
             
