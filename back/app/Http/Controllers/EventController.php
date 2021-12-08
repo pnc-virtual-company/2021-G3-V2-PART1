@@ -36,6 +36,9 @@ class eventController extends Controller
         $request->file('image')->store("public/image");
 
         $event = new Event();
+
+        
+
         $event->title = $request->title;
         $event->description = $request->description;
         $event->image = $request->file('image')->hashName();
@@ -72,19 +75,35 @@ class eventController extends Controller
             'title' => 'min:1|max:100',
             'description' => 'min:1|max:200',
             'image' =>'nullable|image|mimes:jpg,jpeg,png|max:1999',
-            // 'stat_date' => '',
-            // 'end_date' => ''
-
+            'start_date' => 'required|before:end_date',
+            'end_date' => 'required|after:start_date'
         ]);
+<<<<<<< HEAD
         $event =  Event::findOrFail($id); 
+=======
+
+        $event = Event::findOrFail($id);;
+
+>>>>>>> 06cb1e5c0d13c0f398243a02ae5302405d874bd6
         $event->title = $request->title;
         $event->description = $request->description;
         $event->image = $request->image;
+        
+        if($request ->image !== null){
+            $event->image = $request->file('image')->hashName();
+            $request->file('image')->store('public/images/events');
+        }else{
+            $img = 'https://cdn1.iconfinder.com/data/icons/online-shopping-app-ui/48/photo_image_gallary-256.png';
+            $event->image = $img;
+        }
+
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
+        // $countiesPath = storage_path('/countries/countries.json');
+        // $event -> country = json_decode(file_get_contents($countiesPath), true);
 
         $event->save();
-        return response()->json(['Message' => 'Update Event Succesfully'], 200);
+        return response()->json(['Message' => 'Updated Event Succesfully', 'events', $event], 201);
     }
 
     /**
@@ -96,8 +115,10 @@ class eventController extends Controller
     public function destroy($id)
     {
         $isDelete = Event::destroy($id);
-        if($isDelete == 1) 
+        if($isDelete == 1) {
             return response()->json(['message' => 'Event deleted successfully'], 200);
+        }
+           
         return response()->json(['message' => 'ID NOT EXIST'], 404);
     }
     /**
