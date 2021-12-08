@@ -80,7 +80,7 @@ export default {
             .then(res=>{
                 console.log(res.data);
                 this.getCategory();
-            })
+             })
             .catch(err=>{
                 console.log("Error for update: " + err);
             })
