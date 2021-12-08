@@ -1,39 +1,4 @@
 <template>
-  <!-- <form @submit.prevent="ceateEvent">
-    <H1>Create event</H1>
-    <div>
-      <input type="text" placeholder="Title" v-model="title" required />
-    </div>
-    <div>
-      <input type="text" placeholder="Event Catigories" v-model="category" required/>
-    </div>
-    <div class="city">
-      <input type="text" placeholder="City" v-model="city" required/>
-    </div>
-    <textarea name="message" rows="10" cols="30" placeholder="You desciption" v-model="message" required></textarea>
-    
-    <div class="row">
-      <div class="column">
-        <div>
-          <input type="date" placeholder="Start Date" v-model="StartDate"  required/>
-        </div>
-        <div>
-          <input type="date" placeholder="End Date" v-model="EndDate"  required/>
-        </div>
-      </div>
-      
-    </div>
-    <br>
-    <div class="intFile">
-      <input type="file" @change="onFileselected"  />
-    </div>
-    <div class="add">
-      <button class="button-3">
-        <router-link to="/myevent">Back</router-link>
-      </button>
-      <button class="button-2" @click="addEvent">Add event</button>
-    </div>
-  </form> -->
   <section>
     <div class="container">
       <!-- button create an event -->
@@ -91,7 +56,7 @@
                   rows="10"
                   cols="30"
                   placeholder="You desciption"
-                  v-model="message"
+                  v-model="description"
                   required
                 ></textarea>
 
@@ -142,21 +107,55 @@
         </div>
       </div>
     </div>
+
+    <!-- ======================Card View================================== -->
+    <!-- card event -->
+    <div class="row mr-3">
+      <div class="col-sm-4 m-auto">
+        <div class="card mt-2 " v-for="event of eventLists" :key="event.id">
+          <div class="card-body row " >
+            <div class="image">
+              <img
+                :src="url + event.image"
+                style="width: 100%"
+                alt=""
+              />
+            </div>
+            <div class="text col-sm-6">
+                <div>
+                  <h3 class="card-title">{{event.title}}</h3>
+                  <p class="card-text">
+                   {{event.description}}
+                  </p>
+                  <!-- <h6>{{event.city}}</h6> -->
+                  <p>{{event.start_date}}</p>
+                </div>
+                <div class="d-flex justify-content-end align-items-end ">
+                  <button class="btn btn-outline-danger mr-2">Delete</button>
+                  <button class="btn btn-outline-primary">Update</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 
 <script>
 import axios from "axios";
-
+const APP_URL = "http://127.0.0.1:8000/api/events";
 export default {
   data() {
     return {
       title: "",
-      message: "",
+      description: "",
       StartDate: "",
       EndDate: "",
       image: "",
+      eventLists: [],
+      url: "http://127.0.0.1:8000/storage/image/"
     };
   },
   methods: {
@@ -167,24 +166,36 @@ export default {
 
     addEvent() {
       const newEvent = new FormData();
-      newEvent.append("title", this.title);
-      newEvent.append("description", this.message);
-      newEvent.append("image", this.image);
-      newEvent.append("startdate", this.StartDate);
-      newEvent.append("enddate", this.EndDate);
+      newEvent.append("title",this.title);
+      newEvent.append("description",this.description);
+      newEvent.append("image",this.image);
+      newEvent.append("start_date",this.StartDate);
+      newEvent.append("end_date",this.EndDate);
 
-      console.log(this.image);
+      console.log(this.description);
 
-      axios.post("http://127.0.0.1:8000/api/events", newEvent).then((res) => {
+      axios.post(APP_URL, newEvent).then(res => {
         console.log(res.data);
         console.log("Created");
+        this.getevents();
       });
     },
+    getevents() {
+        axios.get(APP_URL).then(res => {
+          this.eventLists = res.data;
+          console.log(this.eventLists);
+        });
+    },
   },
+  mounted() {
+    this.getevents();
+  },
+
 };
 </script>
 
 <style scoped>
+
 form div {
   margin: 1rem 0;
 }
@@ -276,5 +287,17 @@ input[type="date"] {
 }
 a {
   color: white;
+}
+
+
+.card {
+  width: 700px;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.26);
+}
+img{
+  width: 150px;
+  height: 150px;
+  position: center;
 }
 </style>

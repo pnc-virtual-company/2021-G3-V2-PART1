@@ -10,15 +10,13 @@ import FindEvent from "./components/findevent/FindEvent.vue";
 import AllEvent from "./components/allevent/Allevent.vue";
 
 // ============ events card ===========
-import EventView from "./components/myevent/eventView.vue";
-import CardEvent from "./components/myevent/cardEvent.vue";
 import CreateCard from "./components/myevent/createEvent.vue";
 
 const app = createApp(App);
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {path: '/',component: EventView},
+        {path: '/',component: CreateCard},
         {path: '/rigister',component: Register},
         {path: '/signIn',component: SignIn},
         {path: '/SignOut',component: SignOut},
@@ -31,11 +29,7 @@ const router = createRouter({
 })
 
 
-app.component("event-card", CardEvent);
 app.component('create-event', CreateCard);
-
-
-
 
 app.use(router)
 app.mount("#app");
