@@ -1,66 +1,30 @@
 <template>
   <section>
-    <div>
-      <div class="container">
-        <div>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSE6QSATkoE8Ezd9TXDtNPKrNZY258WFfrFA&usqp=CAU"
-            alt=""
-            class="img"
-          />
-        </div>
-
-        <!-- card event -->
-        <div class="row">
-          <div class="col-sm-4 mt-4">
-            <div class="card">
-              <div class="card-body">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnT3N7Gpv6Gvi3L2CohykVfZ-3ByR4ajG6SlhILXDTyEegJDULgkBON2G4RieW0kblSmg&usqp=CAU"
-                  style="width: 100%"
-                  alt=""
-                />
-                <h3 class="card-title">Swimming</h3>
-                <p class="card-text">
-                  d With supporting text below as a natural lead-in to
-                  additional content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
+    <!-- card event -->
+    <div class="row mr-3">
+      <div class="col-sm-4 m-auto">
+        <div class="card mt-2 " v-for="value of event" :key="value.id">
+          <div class="card-body row " >
+            <div class="col-sm-6">
+              <img
+                src="https://s.w-x.co/in-cat_in_glasses.jpg"
+                style="width: 100%"
+                alt=""
+              />
             </div>
-          </div>
-          <div class="col-sm-4 mt-4">
-            <div class="card">
-              <div class="card-body">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnT3N7Gpv6Gvi3L2CohykVfZ-3ByR4ajG6SlhILXDTyEegJDULgkBON2G4RieW0kblSmg&usqp=CAU"
-                  style="width: 100%"
-                  alt=""
-                />
-                <h3 class="card-title">Swimming</h3>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4 mt-4">
-            <div class="card">
-              <div class="card-body">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnT3N7Gpv6Gvi3L2CohykVfZ-3ByR4ajG6SlhILXDTyEegJDULgkBON2G4RieW0kblSmg&usqp=CAU"
-                  style="width: 100%"
-                  alt=""
-                />
-                <h3 class="card-title">Swimming</h3>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
+            <div class="text col-sm-6">
+                <div>
+                  <h3 class="card-title">{{value.title}}</h3>
+                  <p class="card-text">
+                   {{value.discrption}}
+                  </p>
+                  <h6>{{value.city}}</h6>
+                  <p>{{value.date}}</p>
+                </div>
+                <div class="d-flex justify-content-end align-items-end ">
+                  <button class="btn btn-outline-danger mr-2">Delete</button>
+                  <button class="btn btn-outline-primary">Update</button>
+                </div>
             </div>
           </div>
         </div>
@@ -69,15 +33,23 @@
   </section>
 </template>
 <script>
-export default {};
+
+export default {
+  props: ["event"],
+
+  
+};
 </script>
 <style scoped>
-.img {
-  width: 100%;
-  height: 20%;
-}
+
 .card {
+  width: 700px;
   border: 1px solid #ccc;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.26);
+  
+
+  
 }
+
+
 </style>

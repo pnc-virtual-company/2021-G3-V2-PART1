@@ -75,7 +75,6 @@ class eventController extends Controller
             // 'end_date' => ''
 
         ]);
-
         $event =  Event::findOrFail($id); 
         $event->title = $request->title;
         $event->description = $request->description;
