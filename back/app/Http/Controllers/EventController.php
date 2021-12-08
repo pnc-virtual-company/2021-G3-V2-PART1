@@ -13,7 +13,7 @@ class eventController extends Controller
      */
     public function index()
     {
-        return Event::all();
+        return Event::latest()->get();
 
     }
 
@@ -43,6 +43,7 @@ class eventController extends Controller
         $event->end_date = $request->end_date;
 
         $event->save();
+
         return response()->json(['Message' => 'Create Event Succesfully'], 201);
     }
 
