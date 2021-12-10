@@ -1,55 +1,221 @@
 
 <template>
-  <header>
-    <section>
-        <nav-bar> </nav-bar>
-        <h1>MyEvent</h1>
-    </section>
-    <div class="wrapper">
-      <!--================================|-NAVBAR-RIGHT-|================================-->
-      <div class="navbar-right">
-        <div>
-          <button
-            class="btn-add ms-1 h-50 mt-2"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
-            +Create My Event
-          </button>
+  <section>
+    <nav-bar></nav-bar>
+    <div class="container">
+      <!-- button create an event -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#Modal-create"
+        id="btnCreate"
+      >
+        CREATE EVENT!
+      </button>
+
+      <!-- modal create an event -->
+      <div
+        class="modal fade"
+        id="Modal-create"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modal-mode"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form action="" class="ml-5">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger" id="modal-mode">
+                  CREATE EVENT
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    v-model="title"
+                    required
+                  />
+                </div>
+                <div>
+                  <input type="text" placeholder="Event Catigories" required />
+                </div>
+                <div class="city">
+                  <input type="text" placeholder="City" required />
+                </div>
+                <textarea
+                  name="message"
+                  rows="10"
+                  cols="30"
+                  placeholder="You desciption"
+                  v-model="description"
+                  required
+                ></textarea>
+
+                <div class="row">
+                  <div class="column">
+                    <div>
+                      <input
+                        type="datetime-local"
+                        placeholder="Start Date"
+                        v-model="StartDate"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="datetime-local"
+                        placeholder="End Date"
+                        v-model="EndDate"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="intFile">
+                  <input type="file" @change="onFileselected" />
+                </div>
+                <div v-if="imagepreview">
+                  <img :src="imagepreview" alt="" class="img-fluid mr-2" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  CENCEL
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  data-dismiss="modal"
+                  @click="addEvent"
+                >
+                  CREATE
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <!--================================|-BOOTSTRAP-CARD-|================================-->
-        <div class="row row-cols-1 row-cols-md-3 g-4 mt-1 ms-2 me-2 mb-4">
-          <!--================================|-MODAL-|================================-->
-          <div
-            class="modal fade"
-            id="staticBackdrop"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
+      </div>
+    </div>
+    <!-- search  -->
+    <div>
+      <div class="search">
+        <form class="input-group" style="width: 65%" id="search">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            v-model="search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            v-on:keyup="addName"
+          />
+          <button
+            type="submit"
+            id="btnsearch"
+            class="btn btn-outline-warning ml-4"
+            @click.prevent="addName"
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">
-                    Create New My Event
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <input type="text" placeholder="Enter New MyEvent..." ><br><br>
-                  <input type="file" id="img" name="img" accept="image/*"><br><br>
-                  <textarea rows="3" cols="65" name="comment" form="usrform" placeholder="Enter New here..."></textarea> 
-                </div>
-                <div class="modal-footer">
-                   <button class="button-15" role="button">Create</button>
+            search
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ======================Card View================================== -->
+    <!-- card event -->
+    <div class="bigCard">
+      <div class="row mr-3" v-for="event of eventLists" :key="event.id">
+        <!-- modal delete  item-->
+        <div
+          class="modal fade"
+          id="deleteButton"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Delete myevent
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">Are you sure you want to delete?</div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cencel
+                </button>
+                <button
+                  @click="deleleMyEvent(event.id)"
+                  type="submit"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end delete item -->
+        <div class="d-flex">
+          <div class="col-sm-4 m-auto">
+            <div class="card mt-2">
+              <div class="card-body row">
+                <div class="d-flex">
+                  <div class="image">
+                    <img :src="url + event.image" alt="" class="hvr-buzz" />
+                  </div>
+                  <div class="text col-sm-6">
+                    <div>
+                      <h3 class="card-title">{{ event.title }}</h3>
+                      <p class="card-text">
+                        {{ event.description }}
+                      </p>
+                      <!-- <h6>{{event.city}}</h6> -->
+                      <p>{{ event.start_date }}</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end align-items-end">
+                    <button
+                      class="btn btn-outline-danger mr-2"
+                      data-toggle="modal"
+                      data-target="#deleteButton"
+                    >
+                      Delete
+                    </button>
+                    <button class="btn btn-outline-primary">Update</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -57,145 +223,210 @@
         </div>
       </div>
     </div>
-  </header>
+    <!-- END CARD -->
+  </section>
 </template>
+
+
 <script>
-export default ({
-    data() {
-        return{
-            categories:[],
-            
-        }
+import axios from "axios";
+const APP_URL = "http://127.0.0.1:8000/api/events";
+// import axios from '../../http-common.js'
+export default {
+  data() {
+    return {
+      title: "",
+      description: "",
+      StartDate: "",
+      EndDate: "",
+      image: "",
+      eventLists: [],
+      url: "http://127.0.0.1:8000/storage/image/",
+      imagepreview: null,
+    };
+  },
+  methods: {
+    deleleMyEvent(id) {
+      axios.delete(APP_URL + "/" + id).then(() => {
+        this.getevents();
+      });
     },
-    // methods: {
-    //     CreateCategory(){
-    //         let data={}
-    //         let url="";
-    //         axios
-    //           .post(url,data)
-    //           .then(response=>{
-    //               console.log(response.data)
-    //           })
-    //     },
-    //   }
-})
+    onFileselected(event) {
+      this.image = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = (event) => {
+        this.imagepreview = event.target.result;
+      };
+    },
+
+    addEvent() {
+      const newEvent = new FormData();
+      newEvent.append("title", this.title);
+      newEvent.append("description", this.description);
+      newEvent.append("image", this.image);
+      newEvent.append("start_date", this.StartDate);
+      newEvent.append("end_date", this.EndDate);
+
+      console.log(this.description);
+
+      axios.post(APP_URL, newEvent).then((res) => {
+        console.log(res.data);
+        console.log("Created");
+        this.getevents();
+      });
+    },
+    getevents() {
+      axios.get(APP_URL).then((res) => {
+        this.eventLists = res.data;
+        console.log(this.eventLists);
+      });
+    },
+
+    // function delete
+    deleteevent(id) {
+      axios.delete(APP_URL + id).then((res) => {
+        console.log("deleted", res.data);
+        this.getevents();
+      });
+    },
+    getIdremove(id) {
+      this.deleteId = id;
+      console.log("Deleted", this.deleteId);
+    },
+  },
+  mounted() {
+    this.getevents();
+  },
+};
 </script>
+
 <style scoped>
-.btn-add{
-  background: #ffe836;
-  color: #000000;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  border-radius: 0px 15px 0px 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-
+#btnCreate {
+  margin-left: 71%;
+  margin-top: 20px;
 }
-.wrapper{
-  /* display: flex; */
-  margin-left: 1000px;
-  font-size: 15px;
-
+.search {
+  width: 74%;
 }
-.modal-body{
-  font-weight: normal;
-  font-family: Calibri;
-  color:blue;
-
+#search {
+  margin-top: 2%;
+  margin-left: 39%;
 }
-.button-15 {
-  background-image: linear-gradient(#42A1EC, #0070C9);
-  border: 1px solid #0077CC;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  direction: ltr;
-  display: block;
-  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: -.022em;
-  line-height: 1.47059;
-  min-width: 30px;
-  overflow: visible;
-  padding: 4px 15px;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
+form div {
+  margin: 1rem 0;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-left: 6%;
+}
+textarea {
+  width: 80%;
+  margin-left: 6%;
+  height: 10vh;
+}
+.intFile {
+  width: 85%;
+  margin-left: 6%;
+  margin-bottom: 3%;
+  margin-top: -30px;
+}
+label {
   font-weight: bold;
-  margin-right: 175px;
-}
-.button-15:disabled {
-  cursor: default;
-  opacity: .3;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+  color: #777;
+  font-size: 15px;
+  padding: 10px 0;
 }
 
-.button-15:hover {
-  background-image: linear-gradient(#51A9EE, #147BCD);
-  border-color: #1482D0;
+.add {
+  display: flex;
+  justify-content: space-between;
   text-decoration: none;
+  width: 80%;
+  margin-left: 8%;
+  margin-top: 6%;
 }
 
-.button-15:active {
-  background-image: linear-gradient(#3D94D9, #0067B9);
-  border-color: #006DBC;
+.button-3:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
   outline: none;
 }
 
-.button-15:focus {
-  box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
-  outline: none;
+.button-3:hover {
+  background-color: #8b890b;
 }
 
-.btn:hover {
-  background: #3c0f01;
+.button-3:disabled {
+  background-color: #40db62;
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+
+.button-3 {
+  background-color: rgb(71, 73, 173);
+  padding: 7px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+}
+
+.button-2 {
+  border: none;
+  background: #03911a;
+  border-radius: 5px;
+  padding: 7px 10px;
   color: white;
 }
-.modal-title{
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  margin-left: 25%;
-  font-weight: bold;  
-}
-textarea{
+
+.column {
+  float: left;
   width: 100%;
-  border: none;
-  border-bottom: solid #ebd1c9 2px;
-  font-size: 20px;
-  font-weight: 800;
-  color: #004f6c;
+  padding: 0%;
+  margin-top: -20px;
+  margin-left: 6%;
+  margin-bottom: 0;
 }
-h1{
-  margin-top: 0px;
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
-/* =================|-MODAL-|=================*/
-.modal-dialog {
-  background: #004f6c;
+input[type="datetime-local"] {
+  width: 85%;
+  padding: 1%;
 }
-.modal-header h5 {
-  font-size: 20px;
-  font-weight: 900;
+a {
+  color: white;
 }
-.modal-body input {
-  width: 100%;
-  border: none;
-  border-bottom: solid #ebd1c9 2px;
-  font-size: 20px;
-  font-weight: 800;
-  color: #004f6c;
+
+/* card event  */
+.bigCard {
+  overflow-y: auto;
+  height: 69vh;
+  margin-top: 20px;
+  margin-left: -7%;
+  margin-right: 10px;
 }
-.modal-body ::placeholder {
-  color: #004f6c;
+
+.card {
+  width: 750px;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.26);
 }
-@media (max-width: 880px) {
-  .wrapper {
-    display: block;
-  }
-  
+img {
+  width: 200px;
+  height: 180px;
+  position: center;
+}
+.d-flex {
+  display: flex;
 }
 </style>

@@ -37,13 +37,12 @@ Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 
 //.........................Public Route Event..............................................
 Route::get('/events', [EventController::class, 'index']);
-Route::get('/events/{id}', [EventController::class, 'show']);
 Route::get('/events/search/{title}',[EventController::class, 'search']);
-
-//...........................Private Route Event...........................................
 Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+//...........................Private Route Event...........................................
 
 
 //..................................Route Joins Events.....................................

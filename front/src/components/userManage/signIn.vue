@@ -1,91 +1,92 @@
 <template>
-<section>
-    <div class="register-form">
-        <div class="nav"></div>
-        <div class="contain-form">
-            <div class="image">
-                <h3>Event me!!</h3>
-                <h2>Special Event!</h2>
-                <h5>Welcome to our Event! in this web app you can post and join events. But if you have account you just sign in your account.</h5>
-            </div>
-            <div class="form">
-                <form @submit.prevent="userLogin" class="list-form">
-                    <div class="label-reg" >
-                        <label  class="label" for="">Sign in!</label>
-                    </div>
-                    
-                    <div>
-                        <input type="text" placeholder="EMAIL" class="input" v-model="email">
-                    </div>
-                    <div>
-                        <input type="password" placeholder="PASSWORD" class="input" v-model="password">
-                    </div>
-                    
-                    <div>
-                        <p class="text-danger ml-3">{{errorMessage}}</p>
-                    </div>
-                    <div class="p">
-                        <router-link to="/rigister"> Please Register Account!</router-link>
-                    </div>
-                    <div class="button">
-                        <button> Sign In </button>
-                    </div>
-                    <div class="d-flex justify-content-center mt-4">
-                        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-128.png" style="width:40px; height:40px;" alt="">
-                        <img src="https://cdn3.iconfinder.com/data/icons/social-icons-33/512/Telegram-128.png" style="width:40px; height:40px;" alt="">
-                        <img src="https://cdn0.iconfinder.com/data/icons/social-media-circle-6/1024/instagram-128.png" style="width:42px; height:42px;" alt="">
-                        <img src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_skype-128.png" style="width:40px; height:40px;" alt="">
-                    </div>
-                </form>
-            </div>
+    <section>
+        <div class="register-form">
+            <div class="contain-form">
+                <div class="image">
+                    <h3 class="text-black">Event me!!</h3>
+                    <h2 class="text-black">Special Event!</h2>
+                    <h5 class="text-black">Welcome to our Event! in this web app you can post and join events. But if you have account you just sign in your account.</h5>
+                </div>
+                <div class="form">
+                    <form @submit.prevent="userLogin" class="list-form">
+                        <div class="label-reg" >
+                            <label  class="label text-black" for="">Sign in!</label>
+                        </div>
+                        
+                        <div>
+                            <input type="text" placeholder="EMAIL" class="input" v-model="email">
+                        </div>
+                        <div>
+                            <input type="password" placeholder="PASSWORD" class="input" v-model="password">
+                        </div>
+                        
+                        <div>
+                            <p class="text-danger ml-3 ">{{errorMessage}}</p>
+                        </div>
+                        <div class="p">
+                            <router-link to="/rigister" class="text-black"> Please Register Account!</router-link>
+                        </div>
+                        <div class="button">
+                            <button> Sign In </button>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4">
+                            <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-128.png" style="width:40px; height:40px;" alt="">
+                            <img src="https://cdn3.iconfinder.com/data/icons/social-icons-33/512/Telegram-128.png" style="width:40px; height:40px;" alt="">
+                            <img src="https://cdn0.iconfinder.com/data/icons/social-media-circle-6/1024/instagram-128.png" style="width:42px; height:42px;" alt="">
+                            <img src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_skype-128.png" style="width:40px; height:40px;" alt="">
+                        </div>
+                    </form>
+                </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 </template>
 
 <script>
 
     
-import axios from 'axios';
-const url = "http://127.0.0.1:8000/api/signin";
-export default {
-  data() {
-    return {
-      userData: {},
-      email: "",
-      password: "",
-      errorMessage: "",
-    };
-  },
-
-  methods: {
-    userLogin() {
-      let userData = {
-        email: this.email,
-        password: this.password,
+    import axios from '../../http-common.js'
+    export default {
+        emits: ['isNotHidden'],
+    data() {
+        return {
+        userData: {},
+        email: "",
+        password: "",
+        errorMessage: "",
         
-      };
+        };
+    },
 
-      axios.post(url, userData)
-      .then(res => {
-        this.userData = res.data.user;
-        localStorage.setItem('name', res.data.user.name);
-        this.$router.push('/nav');
-        this.errorMessage = '';
-        console.log(res.data.user.name);
-        // console.log(this.userData);
-      })
-      .catch(error => {
-        let statusCode = error.response.status;
-        if(statusCode === 401) {
-          this.errorMessage = 'Invalid data, please try again';
+    methods: {
+        userLogin() {
+        let userData = {
+            email: this.email,
+            password: this.password,
+            
+        };
+
+        axios.post('/signin', userData)
+        .then(res => {
+            this.userData = res.data.user;
+            localStorage.setItem('name', res.data.user.name);
+            this.$router.push('/category');
+            this.errorMessage = '';
+            this.$emit('isNotHidden', true);
+            console.log(res.data.user.name);
+        
+        })
+        .catch(error => {
+            let statusCode = error.response.status;
+            if(statusCode === 401) {
+            this.errorMessage = 'Invalid data, please try again';
+            }
+        })
         }
-      })
-    }
-  },
- 
-};
+    },
+    
+    };
 </script>
 
 
@@ -94,11 +95,13 @@ export default {
     padding: 0;
     margin: 0;
 }
-.nav{
-    padding: 2%;
-    widows: 100%;
-    background: #52C6C1;
+section{
+    background: rgb(163, 243, 223);
+    width: 100%;
+    height: 100%;
+    
 }
+
 .contain-form{
     display: flex;
     justify-content: center;
@@ -117,7 +120,7 @@ export default {
     padding-left: 15px;
     margin: 15px;
     height: 40px;
-    background: #000;
+    background: rgb(143, 168, 164);
     color: rgb(255, 230, 0);
     border-radius:1% ;
 }
@@ -125,7 +128,8 @@ export default {
     width: 350px;
     height: 500px;
     border-radius: 0px 10px 10px 0px;
-    background: rgb(61, 59, 59);
+    background: rgb(183, 246, 243);
+    margin-bottom: 20px;
     
 }
 .form{
@@ -156,7 +160,7 @@ button{
 .image{
     height: 500px;
     width: 350px;
-    background-image: url("../../assets/forest.png");
+    background-image: url("../../assets/flower.jpg");
     margin-top: 40px;
     border-radius: 10px 0px 0px 10px;
     color: white;

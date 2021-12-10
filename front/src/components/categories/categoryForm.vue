@@ -14,13 +14,13 @@
       <div class="navbar-right">
         <div>
           <button
-            class="btn-add ms-1 h-50 mt-2"
+          id="btnCreateCtr"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
             @click="btnCreateNewCate"
           >
-            +Create Categories
+            Create
           </button>
         </div>
         <!--================================|-BOOTSTRAP-CARD-|================================-->
@@ -115,6 +115,15 @@ export default {
 };
 </script>
 <style scoped>
+#btnCreateCtr{
+  border-radius: 5px;
+  background: rgb(132, 132, 231) ;
+  color: white;
+  margin-left: -120%;
+  width: 70px;
+  height: 30px;
+}
+
 .btn-add {
   background: rgb(94, 94, 221);
   color: white;

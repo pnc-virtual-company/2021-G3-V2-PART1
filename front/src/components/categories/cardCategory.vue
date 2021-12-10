@@ -18,7 +18,8 @@
         <update-category></update-category>
     </div>
     
-    <div
+    <div class="allCard">
+        <div
       class="container  hover-zoom"
       v-for="(category, index) of categoryName"
       :key="index"
@@ -37,6 +38,8 @@
                 />
        
     </div>
+    </div>
+    
     <!-- modal delete  item-->
         <div class="modal fade" id="deleteButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -87,7 +90,6 @@
 </template>
 
 <script>
-//
 import Dialog from './dialog.vue';
 export default {
   props: ["categoryName"],
@@ -151,6 +153,11 @@ export default {
 </script>
 
 <style scoped>
+.allCard{
+    height: 59vh;
+    overflow-y: auto;
+    margin-top: -20px;
+}
 .container {
     margin: 0.3rem auto;
     max-width: 50rem;
@@ -189,8 +196,11 @@ h3 {
 .search{
     /* margin: auto;
     margin-left: 15%; */
+    margin-top: -50px;
     display: flex;
     justify-content: center;
+    width: 99%;
+
     
 }
 input[type=search],
