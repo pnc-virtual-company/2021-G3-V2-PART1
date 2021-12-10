@@ -9,7 +9,7 @@ import MyEvent from "./components/myevent/MyEvent.vue";
 // import Category from "./components/categories/Category.vue";
 import FindEvent from "./components/findevent/FindEvent.vue";
 import AllEvent from "./components/allevent/Allevent.vue";
-
+import allEventCard from "./components/allevent/cardAllevent.vue";
 // ============== category ==================
 // import category
 import cardCategory from "./components/categories/cardCategory.vue";
@@ -61,6 +61,7 @@ app.component("view-category",CategoryView);
 app.component("category-form", CategoryForm);
 
 // app myevent 
+app.component('cardAll-event',allEventCard);
 
 app.use(router)
 app.mount("#app");
