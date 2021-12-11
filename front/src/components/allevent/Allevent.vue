@@ -9,32 +9,42 @@
                 <img src="" alt="">
             </div>
             <!-- containt-card -->
-            <div class="p-4" v-for="event of allevents" :key="event.id">
-                <div class="card mb-3 ml-4" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                        <img
-                            src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                            alt="Trendy Pants and Shoes"
-                            class="img-fluid rounded-start"
-                        />
-                        </div>
-                        <div class="col-md-8">
-                        <div class="card-body">
-                            <h3 class="card-title">{{event.title}}</h3>
-                            <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.
-                            </p>
-                            <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
+            
+                <div class=" p-2"  v-for="event of allevents" :key="event.id">
+            
+                    <div class="row mt-4">
+                        <div class="col-sm-8">
+                            <div class="card">
+                            <div class="card-body d-flex">
+                                <div class="img">
+                                    <img :src="url + event.image" alt="" class="image">
+                                </div>
+                                <div class="text ml-4">
+                                    <div class="card-date d-flex ">
+                                        <p class="tart-date">Start date: {{event.start_date}} </p>
+                                        <p class="end-date ml-3">End date: {{event.end_date}}</p>
+                                    </div>
+                                    
+
+                                    <h3 class="card-title">{{event.title}}</h3>
+                                    <p class="card-text">{{event.description}}</p>
+                                    <div class="store ">
+                                        <h5 class="member">Memer: </h5>
+                                        <div class="button">
+                                            <button @click="getJoin" class="join border border-0" >Join</button>
+                                            <button  v-if="isShow" class="quice border border-0">Quice</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                              
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>    
 
-            </div>
+      
             
 
       </div>
@@ -52,6 +62,7 @@ export default {
       return{
           allevents:[],
           url: "http://127.0.0.1:8000/storage/image/",
+          isShow:false
       }
     },
     methods: {
@@ -61,6 +72,9 @@ export default {
             console.log(this.allevents)
           })
           
+      },
+      getJoin(){
+          this.isShow = true;
       }
       
     },
@@ -74,11 +88,33 @@ export default {
 .bg-danger{
     font-size: 20px;
 }
-
-.p-4{
-    display: flex;
-    
+.row{
+    margin-left: 250px;
 }
 
+.image{
+    width:250px;
+    height: 190px;
+}
+.store{
+    display: flex;
+    justify-content: space-between;
+}
+.join,
+.quice{
+    border-radius: 10px;
+    margin-left: 10px;
+    color: cornsilk;
+    font-weight: bold;
+}
+.join{
+    background: rgb(47, 27, 226);
+   
+  
+}
+.quice{
+    background: crimson;
+    
+}
 
 </style>

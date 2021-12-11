@@ -229,9 +229,9 @@
 
 
 <script>
-import axios from "axios";
-const APP_URL = "http://127.0.0.1:8000/api/events";
-// import axios from '../../http-common.js'
+// import axios from "axios";
+// const APP_URL = "http://127.0.0.1:8000/api/events";
+import axios from '../../http-common.js'
 export default {
   data() {
     return {
@@ -247,7 +247,7 @@ export default {
   },
   methods: {
     deleleMyEvent(id) {
-      axios.delete(APP_URL + "/" + id).then(() => {
+      axios.delete("/events/" + id).then(() => {
         this.getevents();
       });
     },
@@ -271,14 +271,14 @@ export default {
 
       console.log(this.description);
 
-      axios.post(APP_URL, newEvent).then((res) => {
+      axios.post('/events', newEvent).then((res) => {
         console.log(res.data);
         console.log("Created");
         this.getevents();
       });
     },
     getevents() {
-      axios.get(APP_URL).then((res) => {
+      axios.get('/events').then((res) => {
         this.eventLists = res.data;
         console.log(this.eventLists);
       });
@@ -286,7 +286,7 @@ export default {
 
     // function delete
     deleteevent(id) {
-      axios.delete(APP_URL + id).then((res) => {
+      axios.delete('/events' + id).then((res) => {
         console.log("deleted", res.data);
         this.getevents();
       });
