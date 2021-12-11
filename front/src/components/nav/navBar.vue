@@ -1,6 +1,6 @@
 <template>
   <header>
-     <nav class="navbar navbar-expand-lg navbar-light bg-info">
+     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +33,7 @@
            <div class="logout">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                    <li>
-                       <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
+                       <button  class="btn btn-outline-dark " @click="logOut"><router-link to="/signIn">Logout</router-link></button>
 
                    </li>
                </ul>
@@ -47,11 +47,25 @@
 
 <script>
 export default {
-
-}
+    emits:['isNotHidden'],
+    data(){
+        return{
+            username:localStorage.getItem('name'),
+            isNav:true
+        }
+    },
+    methods: {
+        logOut(){
+            localStorage.removeItem('name');
+            localStorage.removeItem('id');
+            this.$emit('isNotHidden', false);
+        }
+    },
+};
 </script>
 
 <style scoped>
+    
     #navbarTogglerDemo01{
         display: flex;
         justify-content: space-between;

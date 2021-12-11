@@ -4,15 +4,15 @@
         <div class="nav"></div>
         <div class="contain-form">
             <div class="image">
-                <h3>Event me!!</h3>
-                <h2>Special Event!</h2>
-                <h5>Welcome to our Event! in this web app you can post and join event. But if you don't have account you can Register.</h5>
+                <h3 class="text-black">Event me!!</h3>
+                <h2 class="text-black">Special Event!</h2>
+                <h5 class="text-black">Welcome to our Event! in this web app you can post and join event. But if you don't have account you can Register.</h5>
               
             </div>
             <div class="form">
                 <form @submit.prevent="userRegister" class="list-form">
                     <div class="label-reg">
-                        <label for="">Event me!</label>
+                        <label for="" class="text-black">Event me!</label>
                     </div>
                     <div>
                         <input type="file" name="" id="image" class="d-none" >
@@ -31,7 +31,7 @@
                         <input type="password" placeholder="COMFIRM PASSWORD" v-model="confirm">
                     </div>
                     <div class="p">
-                        <router-link to="/signIn"> Please Sign in!</router-link>
+                        <router-link to="/signIn" class="text-black"> Please Sign in!</router-link>
                     </div>
                     <div class="button">
                         <button>Regiser</button>
@@ -46,59 +46,60 @@
 </template>
 
 <script>
-import axios from 'axios';
-const APP_URL = "http://127.0.0.1:3000/api/register"
-export default {
-    
-    data(){
-        return{
-            username:'',
-            email:'',
-            password:'',
-            confirm:''
-        }
+    import axios from '../../http-common.js'
+    export default {
+        emits: ['isNotHidden'],
+        data(){
         
-    },
-    methods: {
-        userRegister(){
-            let addData = {
-               name:this.username,
-               email:this.email,
-                password:this.password,
-                password_confirmation:this.confirm
+            return{
+                username:'',
+                email:'',
+                password:'',
+                confirm:'',
             }
             
-        axios.post(APP_URL, addData).then(res =>{
-            this.$router.push('/nav');
-            localStorage.setItem('name', res.data.data.name);
-            console.log(res.data.data.name);
-        }).catch(error => {
-            let errorStatus = error.response.status;
-            if(errorStatus === 422) {
-                this.messacongeError = 'Invalid data, please try again';
-                window.confirm('Please enter confirm matching to password or your gmail already Register');
-            }
-            
-        })
+        },
+        methods: {
+            userRegister(){
+                let addData = {
+                name:this.username,
+                email:this.email,
+                    password:this.password,
+                    password_confirmation:this.confirm
+                }
+                
+                axios.post('/register', addData).then(res =>{
+                    this.$router.push('/myevent');
+                    localStorage.setItem('name', res.data.data.name);
+                    localStorage.setItem('id',res.data.data.id);
+                    console.log( res.data.data.id);
+                    this.$emit('isNotHidden',true);
+                }).catch(error => {
+                    let errorStatus = error.response.status;
+                    if(errorStatus === 422) {
+                        this.messacongeError = 'Invalid data, please try again';
+                        window.confirm('Please enter confirm matching to password or your gmail already Register');
+                    }
+                
+                })
 
-        
             
-        }
-        
-    },
-}
+                
+            }
+            
+        },
+    }
 </script>
 
 <style scoped>
+section{
+    background:rgb(151, 238, 216) ;
+}
 *{
     padding: 0;
     margin: 0;
 }
-.nav{
-    padding: 2%;
-    widows: 100%;
-    background: #52C6C1;
-}
+
 .contain-form{
     display: flex;
     justify-content: center;
@@ -117,14 +118,15 @@ input{
     
     margin: 5px;
     height: 40px;
-    background: #000;
+    background: rgb(149, 170, 169);
     color: rgb(255, 230, 0);
 }
 .list-form{
-    width: 350px;
+    width: 330px;
     height: 500px;
-    border-radius: 0px 10px 10px 0px;
-    background: rgb(61, 59, 59);
+    border-radius: 0px 15px 15px 0px;
+    background: rgb(183, 246, 243);
+    margin-bottom: 20px;
     
 }
 .form{
@@ -154,7 +156,7 @@ label{
 .image{
     height: 500px;
     width: 350px;
-    background-image: url("../../assets/forest.png");
+    background-image: url("../../assets/bgres.png");
     margin-top: 40px;
     border-radius: 10px 0px 0px 10px;
     color: white;
