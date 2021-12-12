@@ -74,7 +74,6 @@ class eventController extends Controller
         $request->validate([
             'title' => 'min:1|max:100',
             'description' => 'min:1|max:200',
-            'image' =>'nullable|image|mimes:jpg,jpeg,png|max:1999',
             'start_date' => 'required|before:end_date',
             'end_date' => 'required|after:start_date'
         ]);
@@ -83,16 +82,13 @@ class eventController extends Controller
 
         $event->title = $request->title;
         $event->description = $request->description;
-        $event->image = $request->image;
-        
-        if($request ->image !== null){
-            $event->image = $request->file('image')->hashName();
-            $request->file('image')->store('public/images/events');
-        }else{
-            $img = 'https://cdn1.iconfinder.com/data/icons/online-shopping-app-ui/48/photo_image_gallary-256.png';
-            $event->image = $img;
-        }
-
+        // if($request ->image !== null){
+        //     $event->image = $request->file('image')->hashName();
+        //     $request->file('image')->store('public/images/events');
+        // }else{
+        //     $img = 'https://cdn1.iconfinder.com/data/icons/online-shopping-app-ui/48/photo_image_gallary-256.png';
+        //     $event->image = $img;
+        // }
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
         // $countiesPath = storage_path('/countries/countries.json');
