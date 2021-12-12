@@ -15,15 +15,15 @@
             <div class="main">
                 
                 <div class="form-group has-search mt-4">
-                    <!-- <label for="">Search By Country</label>
+                    <label for="">Search By Title</label>
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" v-on:keyup="findByCountry" v-model="country" placeholder="Search"> -->
+                    <input type="text" class="form-control" v-on:keyup="findByTitle" v-model="title" placeholder="Search">
                     
                 </div>
                 <div class="form-group has-search mt-4">
                     <label for="">Search By City</label>
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" list="dataCountires" v-on:keyup="findByCity" v-model="city" placeholder="Search">
+                    <input type="text" class="form-control" list="dataCountires" v-on:change="findByCity" v-model="city" placeholder="Search">
                     <datalist id="dataCountires">
                         <option  v-for="city of cities" :key="city">{{city}}</option>
                     </datalist>
@@ -50,8 +50,12 @@
                                     </div>
                                     
 
-                                    <h3 class="card-title">{{event.title}}</h3>
+                                    <h5 class="card-title">{{event.title}}</h5>
                                     <p class="card-text">{{event.description}}</p>
+                                    <div class="store-user ">
+                                        <p class="text-success">Category: {{event.category.categoryName}}</p> 
+                                        <p class="text-info">Username: {{event.user.name}} </p>
+                                    </div>
                                     <div class="store ">
                                         <h5 class="member">Memer: </h5>
                                         <div class="button">
@@ -83,27 +87,36 @@ export default {
             allCountry:[],
             cities:[],
             city:'',
-            country:'',
+            title:'',
             allevent:[]
         }
     },
     methods: {
-        findByCity(){
-            if(this.city !== ''){
-                axios.get('events/search/' + this.city).then(res=>{
+        findByTitle(){
+            if(this.title !== ''){
+                axios.get('events/search/' + this.title).then(res=>{
                     this.allevent = res.data;
-                    console.log(this.allevent);
+                   
                 })
             }else{
                 this.getEvents();
              }
             
         },
+        findByCity(){
+            if(this.city !== ''){
+                axios.get('events/searchCity/' + this.city).then(res=>{
+                    this.allevent = res.data;
+                    console.log(this.allevent);
+                })
+            }else{
+                this.getEvents();
+            }
+            
+        },
         getCountries(){
         axios.get('/countries').then(res=>{
-            
             for (let country in res.data) {
-           
                 for(let city of res.data[country]){
                     this.cities.push(city);
                 }
@@ -112,7 +125,7 @@ export default {
     },
     getEvents(){
         axios.get('/events').then(res=>{
-            this.allevent = res.data;
+            this.allevent = res.data.filter(event => event.user_id !== parseInt(localStorage.getItem("id")) );
             })
         }
     },
@@ -136,7 +149,10 @@ export default {
     height: 190px;
 }
 
-
+.store{
+    display: flex;
+    justify-content: space-between;
+}
 .has-search .form-control {
     padding-left: 2.375rem;
 } 
@@ -161,5 +177,9 @@ input{
 }
 .contain-img{
     margin-left: 80px;
+}
+.store-user{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

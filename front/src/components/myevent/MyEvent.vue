@@ -39,7 +39,9 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+              
               <div class="modal-body">
+                <div>{{errorMessage}}</div>
                 <div>
                   <input
                     type="text"
@@ -191,12 +193,15 @@
                   </div>
                   <div class="text col-sm-6">
                     <div>
-                      <h3 class="card-title">{{ event.title }}</h3>
-                      <p class="card-text">
-                        {{ event.description }}
-                      </p>
-                      <!-- <h6>{{event.city}}</h6> -->
-                      <p>{{ event.start_date }}</p>
+
+                          <p>Start: {{ event.start_date }} </p>
+                          <div class="store-user ">
+                              <p class="text-success">Category: {{event.category.categoryName}}</p> 
+                              <p class="text-info">Username: {{event.user.name}} </p>
+                          </div>
+                          
+                          <h4 class="card-title">{{ event.title }}</h4>
+                          <p class="card-text">{{ event.description }}</p>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end align-items-end">
@@ -304,7 +309,7 @@
               v-model="title"
             />
 
-            <!-- <div>
+             <!-- <div>
               <select
                 name="Category"
                 id="category"
@@ -379,14 +384,14 @@ export default {
       url: "http://127.0.0.1:8000/storage/image/",
       imagepreview: null,
       country: "",
-      city: "",
-      search: "",
-      user_id: localStorage.getItem("id"),
-      categories: [],
-      countries: [],
-      cities: [],
-      allCountry: [],
-      updateid: 0,
+      city:"",
+      search:"",
+      errorMessage:"",
+      user_id:localStorage.getItem('id'),
+      categories:[],
+      countries:[],
+      cities:[],
+      allCountry: []
     };
   },
   methods: {
@@ -410,12 +415,17 @@ export default {
       newEvent.append("city", this.city);
       newEvent.append("country", this.country);
       newEvent.append("category_id", this.category_id);
-      newEvent.append("user_id", this.user_id);
-      // console.log(this.description);
-      axios.post("/events", newEvent).then((res) => {
+      newEvent.append("user_id",this.user_id);
+      console.log(newEvent);
+      axios.post('/events', newEvent).then((res) => {
         console.log(res.data);
         console.log("Created");
         this.getevents();
+      }).catch(error => {
+            let statusCode = error.response.status;
+            if(statusCode === 401) {
+                this.errorMessage = 'Invalid data, please try again';
+            }
       });
       this.title = "";
       this.description = "";
@@ -425,9 +435,9 @@ export default {
       this.country = "";
     },
     getevents() {
-      axios.get("/events").then((res) => {
-        this.eventLists = res.data;
-        console.log(this.eventLists);
+      axios.get('/events').then((res) => {
+        this.eventLists = res.data.filter(event => event.user_id === parseInt(localStorage.getItem("id")) );
+        
       });
     },
 
@@ -473,8 +483,8 @@ export default {
         console.log(this.search);
         axios.get("events/search/" + this.search).then((res) => {
           this.eventLists = res.data;
-        });
-      } else {
+        })
+        }else{
         this.getevents();
       }
     },
@@ -633,5 +643,9 @@ img {
 select {
   width: 335px;
   margin-left: 25px;
+}
+.store-user{
+  display: flex;
+  justify-content: space-between;
 }
 </style>
