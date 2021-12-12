@@ -71,16 +71,16 @@
         .then(res => {
             this.userData = res.data.user;
             localStorage.setItem('name', res.data.user.name);
+            localStorage.setItem('id',res.data.user.id);
             this.$router.push('/category');
             this.errorMessage = '';
             this.$emit('isNotHidden', true);
-            console.log(res.data.user.name);
         
         })
         .catch(error => {
             let statusCode = error.response.status;
             if(statusCode === 401) {
-            this.errorMessage = 'Invalid data, please try again';
+                this.errorMessage = 'Invalid data, please try again';
             }
         })
         }

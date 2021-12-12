@@ -13,7 +13,7 @@
                 <div class=" p-2"  v-for="event of allevents" :key="event.id">
             
                     <div class="row mt-4">
-                        <div class="col-sm-8">
+                        <div class="col-sm-11">
                             <div class="card">
                             <div class="card-body d-flex">
                                 <div class="img">
@@ -23,6 +23,8 @@
                                     <div class="card-date d-flex ">
                                         <p class="tart-date">Start date: {{event.start_date}} </p>
                                         <p class="end-date ml-3">End date: {{event.end_date}}</p>
+                                        <p class="end-date ml-3">Country: {{event.country}}</p>
+                                        <p class="end-date ml-3">City: {{event.city}}</p>
                                     </div>
                                     
 
@@ -89,8 +91,8 @@ export default {
     font-size: 20px;
 }
 .row{
-    margin-left: 250px;
-}
+    margin-left: 100px;
+} 
 
 .image{
     width:250px;

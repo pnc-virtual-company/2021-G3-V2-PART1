@@ -71,7 +71,8 @@
                 axios.post('/register', addData).then(res =>{
                     this.$router.push('/myevent');
                     localStorage.setItem('name', res.data.data.name);
-                    console.log(res.data.data.name);
+                    localStorage.setItem('id',res.data.data.id);
+                    console.log( res.data.data.id);
                     this.$emit('isNotHidden',true);
                 }).catch(error => {
                     let errorStatus = error.response.status;

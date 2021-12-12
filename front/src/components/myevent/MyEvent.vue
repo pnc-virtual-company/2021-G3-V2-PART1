@@ -48,11 +48,27 @@
                     required
                   />
                 </div>
+                
+
                 <div>
-                  <input type="text" placeholder="Event Catigories" required />
+                    <select name="Category" id="category" class="form-control"  v-model="category_id">
+                      <option v-for="category of categories" :key="category.id" :value="category.id"> {{category.categoryName}} </option>
+                    </select>
+                </div>
+                <div class="country">
+                  <input type="text" v-model="country" list ="dataCountries" placeholder="Countries" required />
+                  <datalist id="dataCountries">
+                        <option  v-for="country of countries" :key="country">{{country}}</option>
+                  </datalist>
                 </div>
                 <div class="city">
-                  <input type="text" placeholder="City" required />
+                  <input type="text" v-model="city" list ="dataCities" placeholder="City" required />
+                  <datalist id="dataCities">
+                        
+                        <option v-for="city of allCountry[country]" :key="city">{{city}}</option>
+                  </datalist>
+                   
+                   
                 </div>
                 <textarea
                   name="message"
@@ -124,7 +140,7 @@
             v-model="search"
             aria-label="Search"
             aria-describedby="search-addon"
-            v-on:keyup="addName"
+            v-on:keyup="searchEvent"
           />
           <button
             type="submit"
@@ -240,9 +256,18 @@ export default {
       StartDate: "",
       EndDate: "",
       image: "",
+      category_id:null,
       eventLists: [],
       url: "http://127.0.0.1:8000/storage/image/",
       imagepreview: null,
+      country: "",
+      city:"",
+      search:"",
+      user_id:localStorage.getItem('id'),
+      categories:[],
+      countries:[],
+      cities:[],
+      allCountry: []
     };
   },
   methods: {
@@ -268,14 +293,22 @@ export default {
       newEvent.append("image", this.image);
       newEvent.append("start_date", this.StartDate);
       newEvent.append("end_date", this.EndDate);
-
-      console.log(this.description);
-
+      newEvent.append("city",this.city);
+      newEvent.append("country",this.country);
+      newEvent.append("category_id", this.category_id);
+      newEvent.append("user_id",this.user_id);
+      // console.log(this.description);
       axios.post('/events', newEvent).then((res) => {
         console.log(res.data);
         console.log("Created");
         this.getevents();
       });
+      this.title = '';
+      this.description = "";
+      this.StartDate = "";
+      this.EndDate = "";
+      this.city = "";
+      this.country = "";
     },
     getevents() {
       axios.get('/events').then((res) => {
@@ -295,9 +328,41 @@ export default {
       this.deleteId = id;
       console.log("Deleted", this.deleteId);
     },
+    // search value on event
+    searchEvent(){
+      if(this.search !== ''){
+        console.log(this.search);
+        axios.get('events/search/' + this.search).then(res =>{
+          this.eventLists = res.data;
+        })
+        
+      }else{
+        this.getevents();
+      }
+    },
+    getCountries(){
+        axios.get('/countries').then(res=>{
+          
+          this.allCountry = res.data
+          for (let country in this.allCountry) {
+            this.countries.push(country)
+            
+          }
+        })
+    },
+    // get categories
+    getCategory(){
+      axios.get('/categories').then(res =>{
+        this.categories = res.data;
+        console.log(this.categories);
+      })
+    }
   },
+  
   mounted() {
     this.getevents();
+    this.getCountries();
+    this.getCategory();
   },
 };
 </script>
@@ -428,5 +493,9 @@ img {
 }
 .d-flex {
   display: flex;
+}
+select{
+  width: 335px;
+  margin-left: 25px;
 }
 </style>

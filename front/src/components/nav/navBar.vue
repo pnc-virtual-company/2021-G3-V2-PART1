@@ -33,7 +33,7 @@
            <div class="logout">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                    <li>
-                       <button  class="btn btn-outline-dark "><router-link to="/signIn">Logout</router-link></button>
+                       <button  class="btn btn-outline-dark " @click="logOut"><router-link to="/signIn">Logout</router-link></button>
 
                    </li>
                </ul>
@@ -57,6 +57,7 @@ export default {
     methods: {
         logOut(){
             localStorage.removeItem('name');
+            localStorage.removeItem('id');
             this.$emit('isNotHidden', false);
         }
     },

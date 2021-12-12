@@ -116,13 +116,7 @@ export default {
         addName() {
           this.$emit('categoryName', this.search)
         },
-        // end function search
-        cancel() {
-            this.showDialog = false
-        },
-        confirm() {
-            this.showDialog = false
-        } ,
+        
         // function delete
         getIdremove(id){
             this.deleteId = id;
