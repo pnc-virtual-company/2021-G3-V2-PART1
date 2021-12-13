@@ -14,10 +14,10 @@
                         </div>
                         
                         <div>
-                            <input type="text" placeholder="EMAIL" class="input" v-model="email">
+                            <input type="text" placeholder="EMAIL" class="form-control" v-model="email" id='input'>
                         </div>
                         <div>
-                            <input type="password" placeholder="PASSWORD" class="input" v-model="password">
+                            <input type="password" placeholder="PASSWORD" class="form-control" v-model="password" id=input>
                         </div>
                         
                         <div>
@@ -28,12 +28,6 @@
                         </div>
                         <div class="button">
                             <button> Sign In </button>
-                        </div>
-                        <div class="d-flex justify-content-center mt-4">
-                            <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-128.png" style="width:40px; height:40px;" alt="">
-                            <img src="https://cdn3.iconfinder.com/data/icons/social-icons-33/512/Telegram-128.png" style="width:40px; height:40px;" alt="">
-                            <img src="https://cdn0.iconfinder.com/data/icons/social-media-circle-6/1024/instagram-128.png" style="width:42px; height:42px;" alt="">
-                            <img src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_skype-128.png" style="width:40px; height:40px;" alt="">
                         </div>
                     </form>
                 </div>
@@ -117,7 +111,7 @@ section{
     color: white;
     font-weight: bold;
 }  
-.input{
+#input{
     width: 90%;
     padding-left: 15px;
     margin: 15px;

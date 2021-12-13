@@ -19,19 +19,19 @@
                         <label for="image" class="d-flex"><img src="../../assets/avatar.png" alt="" style="width:90px; height:90px; text-align:center;"></label>
                     </div>
                     <div>
-                        <input type="text" placeholder="USERNAME" v-model="username">
+                        <input type="text" placeholder="USERNAME"  class="form-control" v-model="username">
                     </div>
                     <div>
-                        <input type="text" placeholder="EMAIL" v-model="email">
+                        <input type="text" placeholder="EMAIL" class="form-control"  v-model="email">
                     </div>
                     <div>
-                        <input type="password" placeholder="PASSWORD" v-model="password">
+                        <input type="password" placeholder="PASSWORD" class="form-control" v-model="password">
                     </div>
                     <div>
-                        <input type="password" placeholder="COMFIRM PASSWORD" v-model="confirm">
+                        <input type="password" placeholder="COMFIRM PASSWORD" class="form-control" v-model="confirm">
                     </div>
                     <div class="p">
-                        <router-link to="/signIn" class="text-black"> Please Sign in!</router-link>
+                        <router-link to="/signIn" class="text-black "> Please Sign in!</router-link>
                     </div>
                     <div class="button">
                         <button>Regiser</button>
@@ -160,6 +160,7 @@ label{
     margin-top: 40px;
     border-radius: 10px 0px 0px 10px;
     color: white;
+    border-radius: 2px;
 }
 h2{
     

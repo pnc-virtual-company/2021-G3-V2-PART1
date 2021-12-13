@@ -4,16 +4,12 @@
     <section>
       <!-- <nav-ba> </nav-ba> -->
     </section>
-    <div class="d-flex">
-      <button class="text-white border border-none bg-danger m-4">CATEGORIES</button>
-      <p class="mt-4">EVENT ME</p>
-    </div>
     <div class="wrapper ">
       
       <!--================================|-NAVBAR-RIGHT-|================================-->
       <div class="navbar-right">
         <div>
-          <button
+          <button class="mt-4 border border-0"
           id="btnCreateCtr"
             type="button"
             data-bs-toggle="modal"
@@ -117,11 +113,11 @@ export default {
 <style scoped>
 #btnCreateCtr{
   border-radius: 5px;
-  background: rgb(132, 132, 231) ;
+  background: blue ;
   color: white;
-  margin-left: -120%;
-  width: 70px;
-  height: 30px;
+  margin-left: -140%;
+  width: 120px;
+  height: 40px;
 }
 
 .btn-add {
@@ -196,9 +192,7 @@ export default {
   box-shadow: rgba(131, 192, 253, 0.5) 0 0 0 3px;
   outline: none;
 }
-/* .button-15:hover{
-  background-color: orange;
-} */
+
 
 .btn:hover {
   background: #3c0f01;

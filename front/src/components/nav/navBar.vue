@@ -16,8 +16,9 @@
                             loading="lazy"  
                         />
                     </li>
-                    <li class="nav-item active mr-3">
-                        <h4>{{username}}</h4>
+                    <li class="nav-item active mr-3 ">
+                        <h5 class="mt-2">{{username}}</h5>
+                        
                     </li>
                     <li class="nav-item active mr-3">
                         <router-link to="/allevent" class="nav-link text-white">All EVENTS </router-link>
@@ -73,15 +74,17 @@ export default {
         display: flex;
         justify-content: space-between;
     }
-    h4{
-        font-family: "Times New Roman", Times, serif;
-        margin-top: 5px;
-        color: rgb(252, 246, 246);
-        text-shadow: 2px 2px 4px #000000;
-    }
+ 
     .signIn{
         text-decoration: none;
         color: white;
-        font-weight: bold;
+    }
+    .router-link-active{
+        background: rgb(173, 4, 55);
+        border-radius: 10px;
+    }
+    h5{
+        color: white;
+        font-size: 20px;
     }
 </style>

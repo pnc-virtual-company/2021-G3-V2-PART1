@@ -1,13 +1,7 @@
 <template>
     <section>
         <div class="contain-all">
-            <div class="top p-4 d-flex">
-                <button class="bg-danger border border-0 text-white">ALL EVENTS</button>
-                <h3 class="ml-3 mt-1">EVENT-ME</h3>
-            </div>
-            <div class="contain-img">
-                <img src="" alt="">
-            </div>
+            
             <!-- containt-card -->
             
                 <div class=" p-2"  v-for="event of allevents" :key="event.id">
@@ -25,6 +19,11 @@
                                         <p class="end-date ml-3">End date: {{event.end_date}}</p>
                                         <p class="end-date ml-3">Country: {{event.country}}</p>
                                         <p class="end-date ml-3">City: {{event.city}}</p>
+                                        
+                                    </div>
+                                    <div class="store-user d-flex ">
+                                        <p class="user text-success">Username: {{event.user.name}}</p>
+                                        <p class="category text-warning">Category: {{event.category.categoryName}}</p>
                                     </div>
                                     <h3 class="card-title">{{event.title}}</h3>
                                     <p class="card-text">{{event.description}}</p>
@@ -61,8 +60,8 @@ export default {
     methods: {
         getEvent(){
             axios.get('/events').then(res=>{
-                this.allevents = res.data;
-                console.log(this.allevents)
+                this.allevents = res.data.filter(event => event.user_id !== parseInt(localStorage.getItem("id")) );
+                
             })  
         },
         getJoin(id){
@@ -75,7 +74,7 @@ export default {
                 this.getJoinslist();
                 console.log(res.data);
             })
-            this.isJoin = !this.isJoin;
+            this.isJoin = false
         },
         quiteJoin(id){
 
@@ -90,7 +89,7 @@ export default {
                 this.getJoinslist();
             })
 
-            this.isJoin = !this.isJoin;
+            this.isJoin = true
         },
         getJoinslist() {
             axios.get("/joins").then(res => {
@@ -144,6 +143,10 @@ export default {
 .quice{
     background: crimson;
     
+}
+.store-user{
+    display: flex;
+    justify-content: space-between;
 }
 
 </style>

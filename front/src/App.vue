@@ -5,6 +5,7 @@
     <router-view @isNotHidden="navHidden"/>
   </section>
 </template>
+    
 
 <script>
     import Navbar from "./components/nav/navBar.vue";

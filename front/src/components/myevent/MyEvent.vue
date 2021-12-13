@@ -50,27 +50,50 @@
                     required
                   />
                 </div>
-                
 
                 <div>
-                    <select name="Category" id="category" class="form-control"  v-model="category_id">
-                      <option v-for="category of categories" :key="category.id" :value="category.id"> {{category.categoryName}} </option>
-                    </select>
+                  <select
+                    name="Category"
+                    id="category"
+                    class="form-control"
+                    v-model="category_id"
+                  >
+                    <option
+                      v-for="category of categories"
+                      :key="category.id"
+                      :value="category.id"
+                    >
+                      {{ category.categoryName }}
+                    </option>
+                  </select>
                 </div>
                 <div class="country">
-                  <input type="text" v-model="country" list ="dataCountries" placeholder="Countries" required />
+                  <input
+                    type="text"
+                    v-model="country"
+                    list="dataCountries"
+                    placeholder="Countries"
+                    required
+                  />
                   <datalist id="dataCountries">
-                        <option  v-for="country of countries" :key="country">{{country}}</option>
+                    <option v-for="country of countries" :key="country">
+                      {{ country }}
+                    </option>
                   </datalist>
                 </div>
                 <div class="city">
-                  <input type="text" v-model="city" list ="dataCities" placeholder="City" required />
+                  <input
+                    type="text"
+                    v-model="city"
+                    list="dataCities"
+                    placeholder="City"
+                    required
+                  />
                   <datalist id="dataCities">
-                        
-                        <option v-for="city of allCountry[country]" :key="city">{{city}}</option>
+                    <option v-for="city of allCountry[country]" :key="city">
+                      {{ city }}
+                    </option>
                   </datalist>
-                   
-                   
                 </div>
                 <textarea
                   name="message"
@@ -134,7 +157,7 @@
     <!-- search  -->
     <div>
       <div class="search">
-        <form class="input-group" style="width: 65%" id="search">
+        <form class="input-group" style="width: 73%" id="search">
           <input
             type="search"
             class="form-control rounded"
@@ -147,10 +170,10 @@
           <button
             type="submit"
             id="btnsearch"
-            class="btn btn-outline-warning ml-4"
+            class="btn btn-outline-warning "
             @click.prevent="addName"
           >
-            search
+            <i class="fa fa-search"></i>
           </button>
         </form>
       </div>
@@ -160,52 +183,6 @@
     <!-- card event -->
     <div class="bigCard">
       <div class="row mr-3" v-for="event of eventLists" :key="event.id">
-        <!-- modal delete  item-->
-        <div
-          class="modal fade"
-          id="deleteButton"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Delete myevent
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">Are you sure you want to delete?</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Cencel
-                </button>
-                <button
-                  @click="deleleMyEvent(event.id)"
-                  type="submit"
-                  class="btn btn-primary"
-                  data-dismiss="modal"
-                >
-                  Yes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end delete item -->
         <div class="d-flex">
           <div class="col-sm-4 m-auto">
             <div class="card mt-2">
@@ -217,7 +194,7 @@
                   <div class="text col-sm-6">
                     <div>
 
-                          <p>Start: {{ event.start_date }} </p>
+                          <p>Start: {{ event.start_date }} City: {{event.city}} Country: {{event.country}}</p>
                           <div class="store-user ">
                               <p class="text-success">Category: {{event.category.categoryName}}</p> 
                               <p class="text-info">Username: {{event.user.name}} </p>
@@ -232,10 +209,18 @@
                       class="btn btn-outline-danger mr-2"
                       data-toggle="modal"
                       data-target="#deleteButton"
+                      @click="getIdremove(event.id)"
                     >
                       Delete
                     </button>
-                    <button class="btn btn-outline-primary">Update</button>
+                    <button
+                      class="btn btn-outline-primary"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      @click="updateeventaction(event)"
+                    >
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -245,14 +230,146 @@
       </div>
     </div>
     <!-- END CARD -->
+    <!-- modal delete  item-->
+    <div
+      class="modal fade"
+      id="deleteButton"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete myevent</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Are you sure you want to delete?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cencel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              @click="deleleMyEvent(deleteId)"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end delete item -->
+
+    <!-- update myevent -->
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success" id="exampleModalLabel">
+              Update Category
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input
+              class="mt-1 ml-1"
+              type="text"
+              placeholder="Title"
+              style="width: 90%"
+              v-model="title"
+            />
+
+             <!-- <div>
+              <select
+                name="Category"
+                id="category"
+                class="form-control"
+                v-model="category_id"
+              >
+                <option
+                  v-for="category of categories"
+                  :key="category.id"
+                  :value="category.id"
+                >
+                  {{ category.categoryName }}
+                </option>
+              </select>
+            </div> -->
+            <input
+              type="text"
+              class="mt-2 ml-1"
+              placeholder="description"
+              style="width: 90%"
+              v-model="description"
+            />
+
+            <input
+              type="datetime-local"
+              class="mt-2 ml-1"
+              style="width: 90%"
+              v-model="StartDate"
+            />
+            <input
+              type="datetime-local"
+              class="mt-2 ml-1"
+              style="width: 90%"
+              v-model="EndDate"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cencel
+            </button>
+            <button type="submit" class="btn btn-success" data-dismiss="modal"
+              @click="updataform"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 
 <script>
-// import axios from "axios";
-// const APP_URL = "http://127.0.0.1:8000/api/events";
-import axios from '../../http-common.js'
+
+import axios from "../../http-common.js";
 export default {
   data() {
     return {
@@ -261,7 +378,7 @@ export default {
       StartDate: "",
       EndDate: "",
       image: "",
-      category_id:null,
+      category_id: null,
       eventLists: [],
       url: "http://127.0.0.1:8000/storage/image/",
       imagepreview: null,
@@ -277,11 +394,6 @@ export default {
     };
   },
   methods: {
-    deleleMyEvent(id) {
-      axios.delete("/events/" + id).then(() => {
-        this.getevents();
-      });
-    },
     onFileselected(event) {
       this.image = event.target.files[0];
 
@@ -299,8 +411,8 @@ export default {
       newEvent.append("image", this.image);
       newEvent.append("start_date", this.StartDate);
       newEvent.append("end_date", this.EndDate);
-      newEvent.append("city",this.city);
-      newEvent.append("country",this.country);
+      newEvent.append("city", this.city);
+      newEvent.append("country", this.country);
       newEvent.append("category_id", this.category_id);
       newEvent.append("user_id",this.user_id);
       console.log(newEvent);
@@ -314,7 +426,7 @@ export default {
                 this.errorMessage = 'Invalid data, please try again';
             }
       });
-      this.title = '';
+      this.title = "";
       this.description = "";
       this.StartDate = "";
       this.EndDate = "";
@@ -329,46 +441,69 @@ export default {
     },
 
     // function delete
-    deleteevent(id) {
-      axios.delete('/events' + id).then((res) => {
-        console.log("deleted", res.data);
-        this.getevents();
-      });
-    },
     getIdremove(id) {
       this.deleteId = id;
       console.log("Deleted", this.deleteId);
     },
+    deleleMyEvent(deleteId) {
+      axios.delete("/events/" + deleteId).then(() => {
+        this.getevents();
+      });
+    },
+
+    // update
+    updateeventaction(data) {
+      this.updateid = data.id;
+      this.title = data.title;
+      this.description = data.description;
+      this.StartDate = data.start_date;
+      this.EndDate = data.end_date;
+
+      console.log(data);
+    },
+
+    updataform() {
+      let updateevent = {
+        title: this.title,
+        description: this.description,
+        start_date: this.StartDate,
+        end_date: this.EndDate,
+      };
+      let id = this.updateid;
+      axios.put("events/" + id, updateevent).then((res) => {
+        console.log(res.data);
+        this.getevents();
+      });
+    },
+
     // search value on event
-    searchEvent(){
-      if(this.search !== ''){
+    searchEvent() {
+      if (this.search !== "") {
         console.log(this.search);
-        axios.get('events/search/' + this.search).then(res =>{
+        axios.get("events/search/" + this.search).then((res) => {
           this.eventLists = res.data;
         })
         }else{
         this.getevents();
       }
     },
-    getCountries(){
-        axios.get('/countries').then(res=>{
-          
-          this.allCountry = res.data
-          for (let country in this.allCountry) {
-            this.countries.push(country)
-            
-          }
-        })
+    getCountries() {
+      axios.get("/countries").then((res) => {
+        this.allCountry = res.data;
+        for (let country in this.allCountry) {
+          this.countries.push(country);
+        }
+      });
     },
     // get categories
-    getCategory(){
-      axios.get('/categories').then(res =>{
+    getCategory() {
+      axios.get("/categories").then((res) => {
         this.categories = res.data;
         console.log(this.categories);
-      })
-    }
+      });
+    },
   },
-  
+
   mounted() {
     this.getevents();
     this.getCountries();
@@ -504,7 +639,7 @@ img {
 .d-flex {
   display: flex;
 }
-select{
+select {
   width: 335px;
   margin-left: 25px;
 }

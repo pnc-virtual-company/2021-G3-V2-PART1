@@ -82,7 +82,6 @@ class eventController extends Controller
         $request->validate([
             'title' => 'min:1|max:100',
             'description' => 'min:1|max:200',
-            'image' =>'nullable|image|mimes:jpg,jpeg,png|max:1999',
             'start_date' => 'required|before:end_date',
             'end_date' => 'required|after:start_date'
         ]);

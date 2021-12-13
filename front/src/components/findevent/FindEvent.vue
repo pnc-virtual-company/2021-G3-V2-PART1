@@ -2,11 +2,8 @@
 
     <section>
        
-        <div class="container">
-            <div class="contain-first d-flex p-4">
-                <button class="border border-0 bg-danger text-white">FIND EVENT</button>
-                <h4 class="ml-3">EVENT ME</h4>
-            </div>
+        <div class="container mt-4">
+            
             <div class="contain-img">
                 <img src="https://cdn.pixabay.com/photo/2017/07/24/12/43/schrecksee-2534484_960_720.jpg" alt="">
             </div>
@@ -57,10 +54,10 @@
                                         <p class="text-info">Username: {{event.user.name}} </p>
                                     </div>
                                     <div class="store ">
-                                        <h5 class="member">Memer: </h5>
+                                        <p class="member">Memer: </p>
                                         <div class="button">
-                                            <button @click="getJoin" class="join border border-0" >Join</button>
-                                            <button  v-if="isShow" class="quice border border-0">Quice</button>
+                                            <button @click="getJoin" class="join border border-0 bg-primary text-white" >Join</button>
+                                            <button  v-if="isShow" class="quice border border-0 bg-red text-white">Quice</button>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +92,7 @@ export default {
         findByTitle(){
             if(this.title !== ''){
                 axios.get('events/search/' + this.title).then(res=>{
-                    this.allevent = res.data;
+                    this.allevent = res.data.filter(event => event.user_id !== parseInt(localStorage.getItem("id")) );
                    
                 })
             }else{
@@ -181,5 +178,8 @@ input{
 .store-user{
   display: flex;
   justify-content: space-between;
+}
+.join{
+    border-radius: 10px;
 }
 </style>
