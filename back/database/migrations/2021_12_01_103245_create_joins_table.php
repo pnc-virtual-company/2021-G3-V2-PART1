@@ -15,7 +15,8 @@ class CreateJoinsTable extends Migration
     {
         Schema::create('joins', function (Blueprint $table) {
             $table->id();
-            $table->integer('amount');
+            $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('event_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
         });
     }

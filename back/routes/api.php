@@ -14,6 +14,7 @@ Route::post('/signin', [UserController::class, 'signin']);
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\JoinController;
+use App\Http\Controllers\CountriesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,6 +39,8 @@ Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 //.........................Public Route Event..............................................
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/search/{title}',[EventController::class, 'search']);
+Route::get('/events/searchCity/{city}',[EventController::class, 'searchCity']);
+
 Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
@@ -49,3 +52,9 @@ Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
 Route::get('/joins', [JoinController::class, 'index']);
 Route::post('/joins', [JoinController::class, 'store']);
+Route::delete('/joins/{id}',[JoinController::class, 'destroy']);
+// ............................. Route Countries...........................................
+Route::get('/countries',[CountriesController::class, 'getCountries']);
+
+
+

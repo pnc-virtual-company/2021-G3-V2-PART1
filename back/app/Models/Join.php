@@ -8,5 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Join extends Model
 {
     use HasFactory;
-    protected $fillable =['amount'];
+    public function event()
+    {
+        # code...
+        return $this->belongsTo(Event::class,'event_id');
+    }
+    public function user()
+    {
+        # code...
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

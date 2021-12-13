@@ -13,7 +13,8 @@ class eventController extends Controller
      */
     public function index()
     {
-        return Event::latest()->get();
+        return Event::with(["category", "user","join"])->latest()->get();
+    
 
     }
 
@@ -28,20 +29,27 @@ class eventController extends Controller
         $request->validate([
             'title' => 'min:1|max:100',
             'description' => 'min:1|max:200',
-            'image' =>'nullable|image|mimes:jpg,jpeg,png|max:1999'
-       
-
+            'image' =>'nullable|image|mimes:jpg,jpeg,png|max:4000',
+            'start_date' => 'required|before:end_date',
+            'end_date' => 'required|after:start_date'
         ]);
 
-        $request->file('image')->store("public/image");
 
         $event = new Event();
-
-        
-
+        $event->user_id = $request->user_id;
+        $event->category_id = $request->category_id;
         $event->title = $request->title;
         $event->description = $request->description;
-        $event->image = $request->file('image')->hashName();
+        $event -> city = $request->city;
+        $event->country = $request->country;
+        $event->image = $request->image;
+        if($request ->image !== null){
+            $event->image = $request->file('image')->hashName();
+            $request->file('image')->store('public/image');
+        }else{
+            $img = 'https://cdn1.iconfindeventser.com/data/icons/online-shopping-app-ui/48/photo_image_gallary-256.png';
+            $event->image = $img;
+        }
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
 
@@ -79,10 +87,14 @@ class eventController extends Controller
             'end_date' => 'required|after:start_date'
         ]);
      
-        $event = Event::findOrFail($id);;
+        $event = Event::findOrFail($id);
 
+        $event->user_id = $request->user_id;
+        $event->category_id = $request->category_id;
         $event->title = $request->title;
         $event->description = $request->description;
+        $event -> city = $request->city;
+        $event->country = $request->country;
         $event->image = $request->image;
         
         if($request ->image !== null){
@@ -95,8 +107,7 @@ class eventController extends Controller
 
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
-        // $countiesPath = storage_path('/countries/countries.json');
-        // $event -> country = json_decode(file_get_contents($countiesPath), true);
+        
 
         $event->save();
         return response()->json(['Message' => 'Updated Event Succesfully', 'events', $event], 201);
@@ -125,6 +136,14 @@ class eventController extends Controller
      */
     public function search($name)
     {
-        return Event::where('title','like', '%'. $name . '%')->get();
+        return Event::where('title','like', '%'. $name . '%')->with('user','category','join')->get();
     }
+
+    public function searchCity($city){
+
+        return Event::where('city', 'like', '%'. $city . '%')->with('user','category','join')->get();
+    }
+ 
+    
+  
 }

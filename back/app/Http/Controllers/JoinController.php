@@ -14,7 +14,7 @@ class JoinController extends Controller
     public function index()
     {
         //
-        return Join::all();
+        return Join::with(["event", "user"])->latest()->get();
     }
 
     /**
@@ -27,7 +27,8 @@ class JoinController extends Controller
     {
         //
         $join = new Join();
-        $join -> amount = $request -> amount;
+        $join -> user_id = $request->user_id;
+        $join -> event_id = $request->event_id;
         $join -> save();
 
         return response()->json(['Message' => 'success']);
@@ -66,5 +67,6 @@ class JoinController extends Controller
     public function destroy($id)
     {
         //
+        return Join::destroy($id);
     }
 }
