@@ -1,6 +1,5 @@
 <template>
     <section>
-        <nav-bar></nav-bar>
         <category-form @add-category="createCategory" ></category-form>
         <category-card  
         :categoryName="categories" 

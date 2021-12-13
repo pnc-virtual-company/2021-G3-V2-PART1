@@ -2,7 +2,6 @@
 <template>
   <header>
     <section>
-      <!-- <nav-ba> </nav-ba> -->
     </section>
     <div class="wrapper ">
       

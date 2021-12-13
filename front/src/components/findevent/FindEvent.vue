@@ -103,8 +103,7 @@ export default {
         findByCity(){
             if(this.city !== ''){
                 axios.get('events/searchCity/' + this.city).then(res=>{
-                    this.allevent = res.data;
-                    console.log(this.allevent);
+                    this.allevent = res.data.filter(event => event.user_id !== parseInt(localStorage.getItem("id")) );
                 })
             }else{
                 this.getEvents();

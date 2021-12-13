@@ -17,7 +17,7 @@
                         />
                     </li>
                     <li class="nav-item active mr-3 ">
-                        <h5 class="mt-2">{{username}}</h5>
+                        <h6 class="mt">{{username}}</h6>
                         
                     </li>
                     <li class="nav-item active mr-3">
@@ -41,11 +41,9 @@
 
                    </li>
                </ul>
-
            </div>
-           
         </div>
-        </nav>
+    </nav>
   </header>
 </template>
 
@@ -83,8 +81,10 @@ export default {
         background: rgb(173, 4, 55);
         border-radius: 10px;
     }
-    h5{
+    h6{
         color: white;
-        font-size: 20px;
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-top: 10px;
     }
 </style>

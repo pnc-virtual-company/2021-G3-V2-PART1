@@ -1,7 +1,6 @@
 <template>
 <section>
     <div class="register-form">
-        <div class="nav"></div>
         <div class="contain-form">
             <div class="image">
                 <h3 class="text-black">Event me!!</h3>
