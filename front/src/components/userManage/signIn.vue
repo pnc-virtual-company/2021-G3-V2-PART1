@@ -72,6 +72,7 @@
             this.userData = res.data.user;
             localStorage.setItem('name', res.data.user.name);
             localStorage.setItem('id',res.data.user.id);
+            localStorage.setItem('isNotHidden', true);
             this.$router.push('/category');
             this.errorMessage = '';
             this.$emit('isNotHidden', true);

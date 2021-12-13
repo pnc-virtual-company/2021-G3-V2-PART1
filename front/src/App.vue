@@ -28,8 +28,8 @@
       mounted() {
         axios.get("/users").then((res) => {
           this.users = res.data;
-          console.log(this.users);
         });
+        this.isNotHidden = localStorage.getItem('isNotHidden');
       },
     };
 </script>
