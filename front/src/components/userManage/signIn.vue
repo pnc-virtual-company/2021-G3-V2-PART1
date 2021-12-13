@@ -107,6 +107,7 @@ section{
     display: flex;
     justify-content: center;
     
+    
 }
 
 .label-reg{
